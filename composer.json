@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-           "avers-image-uploader\\": ""
+           "avers-image-uploader\\": "src"
         }
     }
 }
