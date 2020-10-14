@@ -2,7 +2,7 @@
     "name": "uploader-image",
     "description": "this is image uploader",
     "keywords": ["yii2", "extension", "widget","file", "form", "upload", "plugin"],
-    "homepage": "https://github.com/kartik-v/yii2-widget-fileinput",
+    "homepage": "https://github.com/seyedmohamadhoseynheydar/avers-image-uploader",
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "authors": [
