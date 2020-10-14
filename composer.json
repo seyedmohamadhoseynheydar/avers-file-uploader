@@ -12,12 +12,9 @@
             "homepage": "http://www.avers.co/"
         }
     ],
-   "require": {
-     
-    },
     "autoload": {
         "psr-4": {
-           "avers-image-uploader\\image-uploader\\": "src"
+           "avers-image-uploader\\": ""
         }
     }
 }
