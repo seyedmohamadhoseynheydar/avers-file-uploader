@@ -1,5 +1,5 @@
 {
-    "name": "avers-image-uploader",
+    "name": "avers-image-uploader/image-uploader",
     "description": "this is image uploader",
     "keywords": ["yii2", "extension", "widget","file", "form", "upload", "plugin"],
     "homepage": "https://github.com/seyedmohamadhoseynheydar/avers-image-uploader",
@@ -12,12 +12,14 @@
             "homepage": "http://www.avers.co/"
         }
     ],
-    "require": {
-       
+   "require": {
+        "vendor/package": "1.3.2",
+        "vendor/package2": "1.*",
+        "vendor/package3": "^2.0.3"
     },
     "autoload": {
         "psr-4": {
-           "avers-image-uploader\\": "src"
+           "avers-image-uploader\\image-uploader\\": "src"
         }
     },
 }
