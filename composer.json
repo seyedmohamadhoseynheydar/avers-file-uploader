@@ -13,7 +13,7 @@
         }
     ],
    "require": {
-      "avers-image-uploader/image-uploader": "1.0.0"
+      
     },
     "autoload": {
         "psr-4": {
