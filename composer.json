@@ -1,5 +1,5 @@
 {
-    "name": "avers-image-uploader/image-uploader",
+    "name": "aversImageUuploader/imageUploader",
     "description": "this is image uploader",
     "keywords": ["yii2", "extension", "widget","file", "form", "upload", "plugin"],
     "homepage": "https://github.com/seyedmohamadhoseynheydar/avers-image-uploader",
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-           "avers\\avers-image-uploader\\": "src"
+           "avers\\aversImageUploader\\": "src"
         }
     }
 }
