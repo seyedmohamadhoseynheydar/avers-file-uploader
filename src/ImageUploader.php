@@ -10,6 +10,8 @@ use yii\helpers\Html;
 class ImageUploader extends Widget
 {
 
+    
+    
     public $form;
     public $model;
     public $mainImage_id;
