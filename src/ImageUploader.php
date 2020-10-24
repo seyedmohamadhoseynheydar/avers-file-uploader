@@ -20,7 +20,11 @@ class ImageUploader extends Widget
     public function init()
     {
         parent::init();
-
+        if ($this->model->image_id != null) {
+            $mainImage_id = $this->model->image_id;
+        } else {
+            $mainImage_id = '';
+        }
 
 
     }
