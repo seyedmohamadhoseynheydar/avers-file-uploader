@@ -14,6 +14,8 @@ class ImageUploader extends Widget
 
 
     public $form;
+    public $form_name;
+    public $form_name_capital;
     public $model;
     public $mainImage_id;
 
@@ -43,9 +45,9 @@ class ImageUploader extends Widget
         $html .= '' . $this->form->field($this->model, 'image_id', ['template' => '{input}'])->hiddenInput() . '';
         $html .= '</span>';
         $html .= '<span class="hidden">';
-        $html .= '' . $this->form->field($this->model, 'mainimage')->fileInput(['onchange' => 'uploadImage("news","News")']) . '';
+        $html .= '' . $this->form->field($this->model, 'mainimage')->fileInput(['onchange' => 'uploadImage("' . $form_name . '","' . $form_name_capital . '")']) . '';
         $html .= '</span>';
-        $html .= '<button onclick=\'openUploadFile("news")\' type="button" class="btn btn-primary btn-sm">
+        $html .= '<button onclick=\'openUploadFile("' . $form_name . '")\' type="button" class="btn btn-primary btn-sm">
                         <i class="fa fa-upload"></i>
                   </button>';
         $html .= '<button type="button" id="select-one-image"
