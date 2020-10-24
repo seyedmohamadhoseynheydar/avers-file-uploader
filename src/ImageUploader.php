@@ -15,7 +15,7 @@ class ImageUploader extends Widget
 
     public $form;
     public $model;
-
+    public $mainImage_id;
 
 
     public function init()
@@ -23,9 +23,9 @@ class ImageUploader extends Widget
         parent::init();
         Asset::register( $this->getView() );
         if ($this->model->image_id != null) {
-            $mainImage_id = $this->model->image_id;
+            $this->mainImage_id = $this->model->image_id;
         } else {
-            $mainImage_id = false;
+            $this->mainImage_id = false;
         }
 
 
@@ -55,7 +55,7 @@ class ImageUploader extends Widget
                         <i class="fa fa-close"></i>
                   </button>';
         $html .= '<div id="main-image" style="margin-top: 10px">';
-        if ($mainImage_id) {
+        if ($this->mainImage_id) {
             $html .= '' . $this->model->getImageTag(700) . '';
         }
         $html .= '</div>';
