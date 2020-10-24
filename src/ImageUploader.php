@@ -21,11 +21,11 @@ class ImageUploader extends Widget
     public function init()
     {
         parent::init();
-        $this->registerJsFile('../js/image-uploader.js', ['positions' => View::POS_END]);
+        Asset::register( $this->getView() );
         if ($this->model->image_id != null) {
             $mainImage_id = $this->model->image_id;
         } else {
-            $mainImage_id = '';
+            $mainImage_id = false;
         }
 
 
