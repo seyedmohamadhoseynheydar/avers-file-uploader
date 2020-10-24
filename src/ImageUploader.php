@@ -6,20 +6,22 @@ namespace avers\aversFileUploader;
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
+use yii\web\View;
 
 class ImageUploader extends Widget
 {
 
-    
-    
+
+
     public $form;
     public $model;
-   
+
 
 
     public function init()
     {
         parent::init();
+        $this->registerJsFile('../js/image-uploader.js', ['positions' => View::POS_END]);
         if ($this->model->image_id != null) {
             $mainImage_id = $this->model->image_id;
         } else {
