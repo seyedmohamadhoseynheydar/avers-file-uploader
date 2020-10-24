@@ -14,7 +14,7 @@ class ImageUploader extends Widget
     
     public $form;
     public $model;
-    public $mainImage_id;
+   
 
 
     public function init()
@@ -53,7 +53,7 @@ class ImageUploader extends Widget
                         <i class="fa fa-close"></i>
                   </button>';
         $html .= '<div id="main-image" style="margin-top: 10px">';
-        if ($this->mainImage_id) {
+        if ($mainImage_id) {
             $html .= '' . $this->model->getImageTag(700) . '';
         }
         $html .= '</div>';
