@@ -1,6 +1,6 @@
 {
     "name": "avers/file-uploader",
-    "description": "this is image uploader",
+    "description": "This package is a list of file uploaders of Avers Company",
     "keywords": ["yii2", "extension", "widget","file", "form", "upload", "plugin", "avers"],
     "homepage": "https://github.com/seyedmohamadhoseynheydar/avers-file-uploader",
     "type": "yii2-extension",
