@@ -1,9 +1,9 @@
 <?php
 
-namespace avers\aversImageUploader\models;
+namespace avers\fileUploader\models;
 
 use Yii;
-use avers\aversImageUploader\models\File;
+use avers\fileUploader\models\File;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
