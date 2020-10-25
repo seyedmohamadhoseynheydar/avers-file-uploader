@@ -240,7 +240,7 @@ function uploadImage($form, $formName, $service) {
 }
 
 function uploadMulti($form, $formName) {
-    var url = $("#upload-multi-image").attr("url");
+    var url = $("#upload-multi-image-avers").attr("url");
     var formData = new FormData($("form")[0]);
     var containerContent = $("#image-gallary").html();
     var webDir = $("#web-directory-avers").val();
@@ -285,7 +285,7 @@ function openUploadVideo(form) {
 }
 
 function uploadVideo(form, formName) {
-    var url = $("#ajax-upload-url").attr("url");
+    var url = $("#ajax-upload-url-avers").attr("url");
     var selector = 'main-video';
     var formData = new FormData($("form")[0]);
     var containerContent = $("#" + selector).html();
