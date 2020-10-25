@@ -1,7 +1,7 @@
 <?php
 
 
-namespace avers\aversFileUploader;
+namespace avers\fileUploader;
 
 use Yii;
 use yii\base\Widget;
