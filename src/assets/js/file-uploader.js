@@ -15,7 +15,7 @@ var id_tag;
 //function upload image
 function uploadMultiImage($p, $i, $pd, $form, $formName) {
 
-    var url = $("#data-url-multi-img").attr("url")
+    var url = $("#data-url-multi-img-avers").attr("url")
     var id = $i
     var parent = $p
     var formData = new FormData($("form")[0]);
@@ -70,8 +70,8 @@ function openUploadTheme(form) {
 }
 
 function uploadTheme($form, $formName) {
-    var url = $("#data-url-theme").attr("url");
-    var webDir = $("#web-directory").val();
+    var url = $("#data-url-theme-avers").attr("url");
+    var webDir = $("#web-directory-avers").val();
     var formData = new FouploadMultiImagermData($("form")[0]);
 
     $ImageSize = '';
@@ -88,7 +88,7 @@ function uploadTheme($form, $formName) {
         },
 
         success: function (response) {
-            var url = $("#data-url-upload-zip").attr("url");
+            var url = $("#data-url-upload-zip-avers").attr("url");
             if (response.uploaded == 1) {
                 $("#load-svg-block").html('');
                 $.ajax({
@@ -132,7 +132,7 @@ function openUploadFileForItems($p, $i, $pd, $form) {
 }
 
 function uploadFileForItems($p, $i, $pd, $form, $formName) {
-    var url = $("#data-url-file-for-items").attr("url");
+    var url = $("#data-url-file-for-items-avers").attr("url");
     var id = $i
     var parent = $p
     var formData = new FormData($("form")[0]);
@@ -185,8 +185,8 @@ function openUploadFile(form) {
 }
 
 function uploadImage($form, $formName, $service) {
-    var url = ['../../controllers/file/ajax-upload', 'key' => 'mainimage', 'allowedType' => 'image'];
-    var webDir = $("#web-directory").val();
+    var url = $("#data-url-img-avers").attr("url");
+    var webDir = $("#web-directory-avers").val();
     if ($form == 'category' && $service == null) {
         $main = 'main-image-category';
         var formData = new FormData($("form")[1]);
@@ -243,7 +243,7 @@ function uploadMulti($form, $formName) {
     var url = $("#upload-multi-image").attr("url");
     var formData = new FormData($("form")[0]);
     var containerContent = $("#image-gallary").html();
-    var webDir = $("#web-directory").val();
+    var webDir = $("#web-directory-avers").val();
     $.ajax({
         url: url + "&formName=" + $formName,  //Server script to process data
         type: "POST",
@@ -289,7 +289,7 @@ function uploadVideo(form, formName) {
     var selector = 'main-video';
     var formData = new FormData($("form")[0]);
     var containerContent = $("#" + selector).html();
-    var webDir = $("#web-directory").val();
+    var webDir = $("#web-directory-avers").val();
 
     // console.log(formData);
     $.ajax({
@@ -344,7 +344,7 @@ function openUploadFileSetting($form, $image) {
 }
 
 function uploadImageSetting($form, $formName, $main, $key, $image) {
-    var url = $("#data-url-img-setting").attr("url")
+    var url = $("#data-url-img-setting-avers").attr("url")
     var formData = new FormData($("form")[0]);
     $ImageSize = 'width:100px;'
     var containerContent = $("#" + $main).html();
@@ -417,7 +417,7 @@ $(document).ready(function () {
         $("#selectImageModal-multi .overlay").addClass("hidden");
         $("#selectImageModal-multi").modal("hide");
     });
-     $(".close-modal-image-one").click(function () {
+    $(".close-modal-image-one").click(function () {
         $("#selectImageModal-one .image-box img").removeClass("selected");
         $("#selectImageModal-one .image-box").removeClass("one-selected");
         $("#selectImageModal-one #btn-select-files").removeClass("one-selected");
@@ -425,7 +425,7 @@ $(document).ready(function () {
         $("#selectImageModal-one").modal("hide");
     });
     $("#select-one-image").click(function () {
-      
+
         $("#selectImageModal-one .image-box").addClass("one-selected");
         $("#selectImageModal-one #btn-select-files").addClass("one-selected");
         $("#selectImageModal-one").modal("show");
@@ -433,13 +433,13 @@ $(document).ready(function () {
 
     $("#select-multi-image").click(function () {
         $("#selectImageModal-multi").modal("show");
-     
+
     });
     $("#selectImageModal-multi").on("click", ".image-box", function () {
         if ($(this).hasClass("one-selected")) {
             $("#selectImageModal-multi .image-box img").removeClass("selected");
             $("#selectImageModal-multi .overlay").addClass("hidden");
-           
+
         }
         if ($(this).find("img").hasClass("selected")) {
             if ($(this).hasClass("one-selected")) {
@@ -458,7 +458,7 @@ $(document).ready(function () {
     });
     $("#selectImageModal-one").on("click", ".image-box", function () {
         if ($(this).hasClass("one-selected")) {
-          
+
             $("#selectImageModal-one .image-box img").removeClass("selected");
             $("#selectImageModal-one .overlay").addClass("hidden");
         }
@@ -477,4 +477,4 @@ $(document).ready(function () {
             $(this).find(".overlay").removeClass("hidden");
         }
     });
-    });
+});
