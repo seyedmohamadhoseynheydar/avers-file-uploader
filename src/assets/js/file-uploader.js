@@ -411,25 +411,63 @@ $(document).ready(function () {
     });
 
     $(".close-modal-image").click(function () {
-        $("#selectImageModal .image-box img").removeClass("selected");
-        $("#selectImageModal .image-box").removeClass("one-selected");
-        $("#selectImageModal #btn-select-files").removeClass("one-selected");
-        $("#selectImageModal .overlay").addClass("hidden");
-        $("#selectImageModal").modal("hide");
+        $("#selectImageModal-multi .image-box img").removeClass("selected");
+        $("#selectImageModal-multi .image-box").removeClass("one-selected");
+        $("#selectImageModal-multi #btn-select-files").removeClass("one-selected");
+        $("#selectImageModal-multi .overlay").addClass("hidden");
+        $("#selectImageModal-multi").modal("hide");
+        
+        $("#selectImageModal-one .image-box img").removeClass("selected");
+        $("#selectImageModal-one .image-box").removeClass("one-selected");
+        $("#selectImageModal-one #btn-select-files").removeClass("one-selected");
+        $("#selectImageModal-one .overlay").addClass("hidden");
+        $("#selectImageModal-one").modal("hide");
     });
     $("#select-one-image").click(function () {
-        $("#selectImageModal .image-box").addClass("one-selected");
-        $("#selectImageModal #btn-select-files").addClass("one-selected");
-        $("#selectImageModal").modal("show");
+        $("#selectImageModal-multi .image-box").addClass("one-selected");
+        $("#selectImageModal-multi #btn-select-files").addClass("one-selected");
+        $("#selectImageModal-multi").modal("show");
+        
+        $("#selectImageModal-one .image-box").addClass("one-selected");
+        $("#selectImageModal-one #btn-select-files").addClass("one-selected");
+        $("#selectImageModal-one").modal("show");
     });
 
     $("#select-multi-image").click(function () {
-        $("#selectImageModal").modal("show");
+        $("#selectImageModal-multi").modal("show");
+        
+        $("#selectImageModal-one").modal("show");
     });
-    $("#selectImageModal").on("click", ".image-box", function () {
+    $("#selectImageModal-multi").on("click", ".image-box", function () {
         if ($(this).hasClass("one-selected")) {
-            $("#selectImageModal .image-box img").removeClass("selected");
-            $("#selectImageModal .overlay").addClass("hidden");
+            $("#selectImageModal-multi .image-box img").removeClass("selected");
+            $("#selectImageModal-multi .overlay").addClass("hidden");
+            
+            $("#selectImageModal-one .image-box img").removeClass("selected");
+            $("#selectImageModal-one .overlay").addClass("hidden");
+        }
+        if ($(this).find("img").hasClass("selected")) {
+            if ($(this).hasClass("one-selected")) {
+                $("#btn-select-files").attr("this-src", "");
+            }
+            $("#btn-select-files").attr("this-id", "");
+            $(this).find("img").removeClass("selected");
+            $(this).find(".overlay").addClass("hidden");
+        } else {
+            if ($(this).hasClass("one-selected")) {
+                $("#btn-select-files").attr("this-src", $(this).attr("this-src")).attr("this-id", $(this).attr("this-id"));
+            }
+            $(this).find("img").addClass("selected");
+            $(this).find(".overlay").removeClass("hidden");
+        }
+    });
+    $("#selectImageModal-one").on("click", ".image-box", function () {
+        if ($(this).hasClass("one-selected")) {
+            $("#selectImageModal-multi .image-box img").removeClass("selected");
+            $("#selectImageModal-multi .overlay").addClass("hidden");
+            
+            $("#selectImageModal-one .image-box img").removeClass("selected");
+            $("#selectImageModal-one .overlay").addClass("hidden");
         }
         if ($(this).find("img").hasClass("selected")) {
             if ($(this).hasClass("one-selected")) {
