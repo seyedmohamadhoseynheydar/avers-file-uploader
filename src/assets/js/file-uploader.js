@@ -399,3 +399,51 @@ function uploadImageSetting($form, $formName, $main, $key, $image) {
 //         }
 //     }
 // }
+
+$(document).ready(function () {
+    $("#remove-image").click(function () {
+        $("#main-image").html("");
+        $("#news-image_id").val("");
+    });
+    $("#remove-video").click(function () {
+        $("#main-video").html("");
+        $("#news-video_id").val("");
+    });
+
+    $(".close-modal-image").click(function () {
+        $("#selectImageModal .image-box img").removeClass("selected");
+        $("#selectImageModal .image-box").removeClass("one-selected");
+        $("#selectImageModal #btn-select-files").removeClass("one-selected");
+        $("#selectImageModal .overlay").addClass("hidden");
+        $("#selectImageModal").modal("hide");
+    });
+    $("#select-one-image").click(function () {
+        $("#selectImageModal .image-box").addClass("one-selected");
+        $("#selectImageModal #btn-select-files").addClass("one-selected");
+        $("#selectImageModal").modal("show");
+    });
+
+    $("#select-multi-image").click(function () {
+        $("#selectImageModal").modal("show");
+    });
+    $("#selectImageModal").on("click", ".image-box", function () {
+        if ($(this).hasClass("one-selected")) {
+            $("#selectImageModal .image-box img").removeClass("selected");
+            $("#selectImageModal .overlay").addClass("hidden");
+        }
+        if ($(this).find("img").hasClass("selected")) {
+            if ($(this).hasClass("one-selected")) {
+                $("#btn-select-files").attr("this-src", "");
+            }
+            $("#btn-select-files").attr("this-id", "");
+            $(this).find("img").removeClass("selected");
+            $(this).find(".overlay").addClass("hidden");
+        } else {
+            if ($(this).hasClass("one-selected")) {
+                $("#btn-select-files").attr("this-src", $(this).attr("this-src")).attr("this-id", $(this).attr("this-id"));
+            }
+            $(this).find("img").addClass("selected");
+            $(this).find(".overlay").removeClass("hidden");
+        }
+    });
+    });
