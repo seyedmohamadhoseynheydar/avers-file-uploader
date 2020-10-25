@@ -61,16 +61,17 @@ class ImageUploader extends Widget
             $html .= '' . $this->model->getImageTag(700) . '';
         }
         $html .= '</div>';
-        $html .= '<div class="label-inline">';
-        $html .= '' . $this->form->field($this->model, "styles[image_position]")->radioList([
+        if ($this->form_name == 'news') {
+            $html .= '<div class="label-inline">';
+            $html .= '' . $this->form->field($this->model, "styles[image_position]")->radioList([
                 "center" => "مرکز", "top" => "بالا", "bottom" => "پایین", "right" => "راست", "left" => "چپ"
             ])->label("بخش اصلی تصویر") . '';
-        $html .= '</div>';
-        $html .= '<p class="text-muted">';
-        $html .= '(' . Yii::t("app", "Maximum 5 MB") . ')';
-        $html .= '</p>';
+            $html .= '</div>';
+            $html .= '<p class="text-muted">';
+            $html .= '(' . Yii::t("app", "Maximum 5 MB") . ')';
+            $html .= '</p>';
+        }
         return $html;
-
     }
 
 }
