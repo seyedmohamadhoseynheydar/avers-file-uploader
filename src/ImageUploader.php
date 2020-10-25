@@ -7,6 +7,7 @@ use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\web\View;
+use avers\fileUploader\models\File;
 
 class ImageUploader extends Widget
 {
