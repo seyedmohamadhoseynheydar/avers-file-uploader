@@ -36,12 +36,16 @@ class GalleryUploader extends Widget
     {
         parent::init();
 
-        $html = '';
+        $html = '
+            <input type="hidden" id="upload-multi-image-avers"
+               url="<?= \yii\helpers\Url::to(['@vendor/avers/fileUploader/src/controllers/file/upload-all', 'key' => 'files', 'allowedType' => 'image']) ?>">
+            <input type="hidden" id="web-directory-avers" value="<?= \yii\helpers\Url::to('@vendor/avers/fileUploader/src/controllers/') ?>">
+        ';
         $html .= '<label>';
         $html .= '' . Yii::t('app', 'add image gallery') . '';
         $html .= '</label>';
         $html .= '<span class="hidden">';
-        $html .= '' . $this->form->field($this->model, 'files[]')->fileInput(['multiple' => true,'onchange' => 'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '")']) . '';
+        $html .= '' . $this->form->field($this->model, 'files[]')->fileInput(['multiple' => true,'onchange' => 'uploadMulti("' . $this->form_name . '","' . $this->form_name_capital . '")']) . '';
         $html .= '</span>';
         $html .= '<button onclick=\'openMultiUpload("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
