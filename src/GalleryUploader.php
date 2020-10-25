@@ -51,9 +51,9 @@ class GalleryUploader extends Widget
                   </button>';
 
         $html .= '<div class="row" id="image-gallary" style="margin-top: 10px">';
-        if (!this->model->isNewRecord) {
-            if (!is_null(this->model->collection_id)) {
-                $files = File::find()->where(['collection_id' => this->model->collection_id])->all();
+        if (!$this->model->isNewRecord) {
+            if (!is_null($this->model->collection_id)) {
+                $files = File::find()->where(['collection_id' => $this->model->collection_id])->all();
                 if ($files) {
                     foreach ($files as $file) {
 
@@ -64,7 +64,7 @@ class GalleryUploader extends Widget
                         $html .= '<button type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-'.$file->id.'">';
                         $html .= '<i class="fa fa-close"></i>';
                         $html .= '</button>';
-                        $html .= '<img style="" src="'.this->model->getImageUriById($file->id, null, 150, File::RESIZE_INSIDE) .'">';
+                        $html .= '<img style="" src="'.$this->model->getImageUriById($file->id, null, 150, File::RESIZE_INSIDE) .'">';
                         $html .= '</div>';
                     }
                 }
