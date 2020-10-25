@@ -1,6 +1,6 @@
 <?php
 
-namespace avers\aversFileUploader;
+namespace avers\fileUploader;
 
 use common\models\Main;
 use common\models\Module;
