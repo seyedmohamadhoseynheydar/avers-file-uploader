@@ -185,7 +185,7 @@ function openUploadFile(form) {
 }
 
 function uploadImage($form, $formName, $service) {
-    var url = $("#data-url-img").attr("url");
+    var url = ['../../controllers/file/ajax-upload', 'key' => 'mainimage', 'allowedType' => 'image'];
     var webDir = $("#web-directory").val();
     if ($form == 'category' && $service == null) {
         $main = 'main-image-category';
