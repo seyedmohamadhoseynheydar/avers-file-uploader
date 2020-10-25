@@ -1,6 +1,6 @@
 <?php
 
-namespace avers\aversImageUploader\models;
+namespace avers\fileUploader\models;
 
 use Yii;
 
