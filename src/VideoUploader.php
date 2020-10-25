@@ -29,7 +29,10 @@ class VideoUploader extends Widget
     {
         parent::init();
         
-        $html = '';
+        $html = '
+            <input type="hidden" id="ajax-upload-url-avers" url="<?= \yii\helpers\Url::to(['@vendor/avers/fileUploader/src/controllers/file/ajax-upload']) ?>">
+            <input type="hidden" id="web-directory-avers" value="<?= \yii\helpers\Url::to('@vendor/avers/fileUploader/src/controllers/') ?>">
+        ';
         $html .= '<label>';
         $html .= '' . Yii::t('app', 'upload main video') . '';
         $html .= '</label>';
@@ -37,7 +40,7 @@ class VideoUploader extends Widget
         $html .= '' . $this->form->field($this->model, 'video_id', ['template' => '{input}'])->hiddenInput() . '';
         $html .= '</span>';
         $html .= '<span class="hidden">';
-        $html .= '' . $this->form->field($this->model, 'main_video')->fileInput(['onchange' => 'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '")']) . '';
+        $html .= '' . $this->form->field($this->model, 'main_video')->fileInput(['onchange' => 'uploadVideo("' . $this->form_name . '","' . $this->form_name_capital . '")']) . '';
         $html .= '</span>';
         $html .= '<button onclick=\'openUploadVideo("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
