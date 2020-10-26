@@ -6,9 +6,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\imagine\Image;
-use avers\fileUploader\models\File;
-use avers\fileUploader\models\FileSearch;
-use avers\fileUploader\models\Main;
+use \avers\fileUploader\models\File;
+use \avers\fileUploader\models\FileSearch;
+use \avers\fileUploader\models\Main;
 
 // use Imagine\Gd;
 use Imagine\Image\Box;
@@ -38,7 +38,7 @@ class FileController extends Controller
     public function actionIndex()
     {
         if (\Yii::$app->user->can('viewFile')) {
-            $searchModel = new avers\fileUploader\models\FileSearch();
+            $searchModel = new FileSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
             return $this->render('index', [
@@ -52,14 +52,14 @@ class FileController extends Controller
 
     public function actionAjaxUpload($key = 'upload', $allowedType = null, $formName = null)
     {
-        $model = new avers\fileUploader\models\File();
+        $model = new File();
 
         if (strpos($_FILES[$formName]['type'][$key], 'video') === 0) {
-            $type = avers\fileUploader\models\File::TYPE_VIDEO;
+            $type = File::TYPE_VIDEO;
         } elseif (strpos($_FILES[$formName]['type'][$key], 'image') === 0) {
-            $type = avers\fileUploader\models\File::TYPE_IMAGE;
+            $type = File::TYPE_IMAGE;
         } else {
-            $type = avers\fileUploader\models\File::TYPE_ATTACHMENT;
+            $type = File::TYPE_ATTACHMENT;
         }
         if (!isset($_FILES[$formName]['name'][$key])) {
             $r = [
@@ -74,11 +74,11 @@ class FileController extends Controller
 
         if ($allowedType) {
             if ($allowedType == 'image') {
-                $checkType = avers\fileUploader\models\File::TYPE_IMAGE;
+                $checkType = File::TYPE_IMAGE;
             } elseif ($allowedType == 'video') {
-                $checkType = avers\fileUploader\models\File::TYPE_IMAGE;
+                $checkType = File::TYPE_IMAGE;
             } else {
-                $checkType = avers\fileUploader\models\File::TYPE_ATTACHMENT;
+                $checkType = File::TYPE_ATTACHMENT;
             }
 
             if ($checkType != $type) {
@@ -89,7 +89,7 @@ class FileController extends Controller
                 return $this->asJson($r);
             }
         }
-        if ($type == avers\fileUploader\models\File::TYPE_IMAGE) {
+        if ($type == File::TYPE_IMAGE) {
             if ($_FILES[$formName]['size'][$key] > 5000000) {
                 $r = [
                     'uploaded' => 0,
@@ -98,7 +98,7 @@ class FileController extends Controller
                 return $this->asJson($r);
             }
         }
-        if ($type == avers\fileUploader\models\File::TYPE_VIDEO) {
+        if ($type == File::TYPE_VIDEO) {
             if ($_FILES[$formName]['size'][$key] > 30000000) {
                 $r = [
                     'uploaded' => 0,
@@ -146,25 +146,25 @@ class FileController extends Controller
 
     public function actionAjaxMultiImage($key = 'upload', $allowedType = null, $formName = null)
     {
-        $model = new avers\fileUploader\models\File();
+        $model = new File();
         $arrImageId = [];
         $arrImageName = [];
         $arrImageUrl = [];
         foreach ($_FILES[$formName]['type'][$key] as $key1 => $value1) {
             if (strpos($value1, 'video') === 0) {
-                $type = avers\fileUploader\models\File::TYPE_VIDEO;
+                $type = File::TYPE_VIDEO;
             } elseif (strpos($value1, 'image') === 0) {
-                $type = avers\fileUploader\models\File::TYPE_IMAGE;
+                $type = File::TYPE_IMAGE;
             } else {
-                $type = avers\fileUploader\models\File::TYPE_ATTACHMENT;
+                $type = File::TYPE_ATTACHMENT;
             }
             if ($allowedType) {
 
-                $checkType = avers\fileUploader\models\File::TYPE_ATTACHMENT;
+                $checkType = File::TYPE_ATTACHMENT;
                 if ($allowedType == 'image') {
-                    $checkType = avers\fileUploader\models\File::TYPE_IMAGE;
+                    $checkType = File::TYPE_IMAGE;
                 } elseif ($allowedType == 'video') {
-                    $checkType = avers\fileUploader\models\File::TYPE_VIDEO;
+                    $checkType = File::TYPE_VIDEO;
                 }
                 if (isset($type)) {
 
@@ -178,7 +178,7 @@ class FileController extends Controller
                 }
             }
 
-            if ($checkType == avers\fileUploader\models\File::TYPE_IMAGE) {
+            if ($checkType == File::TYPE_IMAGE) {
                 if ($_FILES[$formName]['size'][$key][$key1] > 5000000) {
                     $r = [
                         'uploaded' => 0,
@@ -221,7 +221,7 @@ class FileController extends Controller
 
     public function actionAjaxMultiUpload($key = 'upload', $allowedType = null, $formName = null, $id = null)
     {
-        $model = new avers\fileUploader\models\File();
+        $model = new File();
         foreach ($_FILES[$formName]['type'][$key] as $key1 => $value1) {
             foreach ($value1 as $k1 => $v1) {
 
@@ -229,14 +229,14 @@ class FileController extends Controller
                 if ($v1 != '' && $k1 == $id) {
 
                     if (strpos($v1, 'video') === 0) {
-                        $type = avers\fileUploader\models\File::TYPE_VIDEO;
+                        $type = File::TYPE_VIDEO;
 
                     } elseif (strpos($v1, 'image') === 0) {
 
-                        $type = avers\fileUploader\models\File::TYPE_IMAGE;
+                        $type = File::TYPE_IMAGE;
 
                     } else {
-                        $type = avers\fileUploader\models\File::TYPE_ATTACHMENT;
+                        $type = File::TYPE_ATTACHMENT;
 
                     }
 
@@ -252,11 +252,11 @@ class FileController extends Controller
 
         if ($allowedType) {
 
-            $checkType = avers\fileUploader\models\File::TYPE_ATTACHMENT;
+            $checkType = File::TYPE_ATTACHMENT;
             if ($allowedType == 'image') {
-                $checkType = avers\fileUploader\models\File::TYPE_IMAGE;
+                $checkType = File::TYPE_IMAGE;
             } elseif ($allowedType == 'video') {
-                $checkType = avers\fileUploader\models\File::TYPE_VIDEO;
+                $checkType = File::TYPE_VIDEO;
             }
 
             if (isset($type)) {
@@ -383,23 +383,23 @@ class FileController extends Controller
                         'size' => $_FILES[$formName]['size'][$key][$key1],
                     ];
                     if (strpos($_FILES[$formName]['type'][$key][$key1], 'video') === 0) {
-                        $type = avers\fileUploader\models\File::TYPE_VIDEO;
+                        $type = File::TYPE_VIDEO;
                     } elseif (strpos($_FILES[$formName]['type'][$key][$key1], 'image') === 0) {
-                        $type = avers\fileUploader\models\File::TYPE_IMAGE;
+                        $type = File::TYPE_IMAGE;
                     } elseif (strpos($_FILES[$formName]['type'][$key][$key1], 'audio') === 0) {
-                        $type = avers\fileUploader\models\File::TYPE_AUDIO;
+                        $type = File::TYPE_AUDIO;
                     } else {
-                        $type = avers\fileUploader\models\File::TYPE_ATTACHMENT;
+                        $type = File::TYPE_ATTACHMENT;
                     }
                     if ($allowedType) {
 
-                        $checkType = avers\fileUploader\models\File::TYPE_ATTACHMENT;
+                        $checkType = File::TYPE_ATTACHMENT;
                         if ($allowedType == 'image') {
-                            $checkType = avers\fileUploader\models\File::TYPE_IMAGE;
+                            $checkType = File::TYPE_IMAGE;
                         } elseif ($allowedType == 'video') {
-                            $checkType = avers\fileUploader\models\File::TYPE_VIDEO;
+                            $checkType = File::TYPE_VIDEO;
                         } elseif ($allowedType == 'audio') {
-                            $checkType = avers\fileUploader\models\File::TYPE_AUDIO;
+                            $checkType = File::TYPE_AUDIO;
                         }
                         if ($checkType != $type) {
                             $r = [
@@ -409,7 +409,7 @@ class FileController extends Controller
                             return $this->asJson($r);
                         }
                     }
-                    if (isset($checkType) && $checkType == avers\fileUploader\models\File::TYPE_IMAGE && $_FILES[$formName]['size'][$key][$key1] > 5000000) {
+                    if (isset($checkType) && $checkType == File::TYPE_IMAGE && $_FILES[$formName]['size'][$key][$key1] > 5000000) {
                         $r = [
                             'uploaded' => 0,
                             'error' => ['message' => Yii::t('app', 'maximum 5MB are accepted', ['size' => 5000000])]
@@ -420,7 +420,7 @@ class FileController extends Controller
             }
 
         }
-        $results = (new avers\fileUploader\models\Main())->uploadAllPure($files);
+        $results = (new Main())->uploadAllPure($files);
         $r = [];
         /** @var File $result */
         foreach ($results as $key => $result) {
@@ -457,7 +457,7 @@ class FileController extends Controller
     public function actionGetImages()
     {
         $html = '';
-        $files = avers\fileUploader\models\File::find()->where(['type' => avers\fileUploader\models\File::TYPE_IMAGE])->andWhere(['!=', 'id', 1])->orderBy('id desc')->all();
+        $files = File::find()->where(['type' => File::TYPE_IMAGE])->andWhere(['!=', 'id', 1])->orderBy('id desc')->all();
         if ($files) {
             foreach ($files as $file) {
                 $html .= ' <div class="image-box" this-id="' . $file->id . '" this-src="' . $file->getImageUriById($file->id) . '">
@@ -476,10 +476,10 @@ class FileController extends Controller
     public function actionUpload($key = 'upload', $formName = null)
     {
 
-        $model = new avers\fileUploader\models\File();
-        $type = avers\fileUploader\models\File::TYPE_IMAGE;
+        $model = new File();
+        $type = File::TYPE_IMAGE;
         if (isset($_FILES['upload']) && $_FILES['upload']['type'] == 'video/mp4') {
-            $type = avers\fileUploader\models\File::TYPE_VIDEO;
+            $type = File::TYPE_VIDEO;
         }
         $result = $model->uploadOnePure($_FILES, null, $type);
         /*
@@ -519,7 +519,7 @@ class FileController extends Controller
 
     public function actionDownload($id)
     {
-        $file = avers\fileUploader\models\File::find()->where(['uri' => $id])->select(['name', 'path'])->limit(1)->one();
+        $file = File::find()->where(['uri' => $id])->select(['name', 'path'])->limit(1)->one();
         if ($file === null) {
             return null;
         }
@@ -529,7 +529,7 @@ class FileController extends Controller
 
     public function actionVideo($id)
     {
-        $file = avers\fileUploader\models\File::find()->where(['uri' => $id])->select(['name', 'path'])->limit(1)->one();
+        $file = File::find()->where(['uri' => $id])->select(['name', 'path'])->limit(1)->one();
         if ($file === null) {
             return null;
         }
@@ -537,14 +537,14 @@ class FileController extends Controller
         return \Yii::$app->response->sendFile($path);
     }
 
-    public function actionImage($id, $width = null, $height = null, $resize = avers\fileUploader\models\File::RESIZE_CROP, $name = null)
+    public function actionImage($id, $width = null, $height = null, $resize = File::RESIZE_CROP, $name = null)
     {
         $isWindows = false;
         if (strcasecmp(substr(PHP_OS, 0, 3), 'WIN') == 0) {
             $isWindows = true;
         }
         if ($isWindows && YII_ENV_DEV) {
-            $file = avers\fileUploader\models\File::find()->where(['uri' => $id])->select(['name', 'path'])->limit(1)->one();
+            $file = File::find()->where(['uri' => $id])->select(['name', 'path'])->limit(1)->one();
 
             if ($file === null) {
                 return null;
@@ -562,7 +562,7 @@ class FileController extends Controller
             } elseif (empty($width) && empty($height)) {
                 $width = $size->getWidth();
                 $height = $size->getHeight();
-            } elseif ($resize == avers\fileUploader\models\File::RESIZE_CROP) {
+            } elseif ($resize == File::RESIZE_CROP) {
                 $hrate = $size->getHeight() / $height;
                 $wrate = $size->getWidth() / $width;
                 if ($hrate < $wrate) { // horizentall
@@ -592,7 +592,7 @@ class FileController extends Controller
             header('Expires:0');
 
             /** @var File $file */
-            $file = avers\fileUploader\models\File::find()->where(['uri' => $id])->select(['name', 'path', 'position'])->limit(1)->one();
+            $file = File::find()->where(['uri' => $id])->select(['name', 'path', 'position'])->limit(1)->one();
             if ($file === null) {
                 return null;
             }
@@ -604,7 +604,7 @@ class FileController extends Controller
             $realPath = $file->basePath . "/" . $path;
             $realPath .= $width ? 'w' . $width : '';
             $realPath .= $height ? 'h' . $height : '';
-            if ($width && $height && $resize != avers\fileUploader\models\File::RESIZE_CROP) {
+            if ($width && $height && $resize != File::RESIZE_CROP) {
                 $realPath .= 's' . $resize;
             }
             $realPath .= (($width || $height) ? '-' : '') . $fileName;
@@ -650,7 +650,7 @@ class FileController extends Controller
 
     }
 
-    private function saveImage($realPath, $file, $width = null, $height = null, $resize = avers\fileUploader\models\File::RESIZE_CROP)
+    private function saveImage($realPath, $file, $width = null, $height = null, $resize = File::RESIZE_CROP)
     {
         $image = Image::getImagine();
         $newImage = $image->open($file->basePath . "/" . $file->path);
@@ -665,7 +665,7 @@ class FileController extends Controller
         } elseif (empty($width) && empty($height)) {
             $width = $size->getWidth();
             $height = $size->getHeight();
-        } elseif ($resize == avers\fileUploader\models\File::RESIZE_CROP) {
+        } elseif ($resize == File::RESIZE_CROP) {
             $hrate = $size->getHeight() / $height;
             $wrate = $size->getWidth() / $width;
             if ($hrate < $wrate) { // horizentall
@@ -719,7 +719,7 @@ class FileController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = avers\fileUploader\models\File::findOne($id)) !== null) {
+        if (($model = File::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
