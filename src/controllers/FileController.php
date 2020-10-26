@@ -4,9 +4,9 @@ use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\imagine\Image;
-use avers\fileUploader\models\File();
-use avers\fileUploader\models\FileSearch();
-use avers\fileUploader\models\Main();
+use avers\fileUploader\models\File;
+use avers\fileUploader\models\FileSearch;
+use avers\fileUploader\models\Main;
 
 // use Imagine\Gd;
 use Imagine\Image\Box;
