@@ -30,8 +30,8 @@ class VideoUploader extends Widget
         parent::init();
         
         $html = '
-            <input type="hidden" id="ajax-upload-url-avers" url="'. \yii\helpers\Url::to(['@vendor/avers/fileUploader/src/controllers/file/ajax-upload']) .'">
-            <input type="hidden" id="web-directory-avers" value="'. \yii\helpers\Url::to('@vendor/avers/fileUploader/src/controllers/') .'">
+            <input type="hidden" id="ajax-upload-url-avers" url="'. \yii\helpers\Url::to(['file/ajax-upload']) .'">
+            <input type="hidden" id="web-directory-avers" value="'. \yii\helpers\Url::to('@web/') .'">
         ';
         $html .= '<label>';
         $html .= '' . Yii::t('app', 'upload main video') . '';
