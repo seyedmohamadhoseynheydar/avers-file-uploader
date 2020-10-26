@@ -2,6 +2,7 @@
 namespace avers\fileUploader\controllers;
 use Yii;
 use yii\web\HttpException;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\imagine\Image;
