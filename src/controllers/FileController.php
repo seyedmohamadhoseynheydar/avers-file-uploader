@@ -1,4 +1,5 @@
 <?php
+namespace avers\fileUploader;
 use Yii;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
