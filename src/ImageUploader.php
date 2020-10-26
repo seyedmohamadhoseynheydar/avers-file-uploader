@@ -40,9 +40,9 @@ class ImageUploader extends Widget
 
         $html = '           
             <input type="hidden" id="data-url-img-avers"
-               url="'.\yii\helpers\Url::to(['@vendor/avers/fileUploader/src/controllers/file/ajax-upload', 'key' => 'mainimage', 'allowedType' => 'image'],true).'">
-            <input type="hidden" id="ajax-upload-url-avers" url="'.\yii\helpers\Url::to(['@vendor/avers/fileUploader/src/controllers/file/ajax-upload'],true).'">           
-            <input type="hidden" id="web-directory-avers" value="'.\yii\helpers\Url::to('@vendor/avers/fileUploader/src/controllers/',true).'">
+               url="'.\yii\helpers\Url::to(['file/ajax-upload', 'key' => 'mainimage', 'allowedType' => 'image']).'">
+            <input type="hidden" id="ajax-upload-url-avers" url="'.\yii\helpers\Url::to(['file/ajax-upload']).'">           
+            <input type="hidden" id="web-directory-avers" value="'.\yii\helpers\Url::to('@web/').'">
         ';
         $html .= '<label>';
         $html .= '' . Yii::t('app', 'upload main image') . '';
