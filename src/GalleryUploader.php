@@ -38,8 +38,8 @@ class GalleryUploader extends Widget
 
         $html = '
             <input type="hidden" id="upload-multi-image-avers"
-               url="'.\yii\helpers\Url::to(['@vendor/avers/fileUploader/src/controllers/file/upload-all', 'key' => 'files', 'allowedType' => 'image']).'">
-            <input type="hidden" id="web-directory-avers" value="'.\yii\helpers\Url::to('@vendor/avers/fileUploader/src/controllers/').'">
+               url="'.\yii\helpers\Url::to(['file/upload-all', 'key' => 'files', 'allowedType' => 'image']).'">
+            <input type="hidden" id="web-directory-avers" value="'.\yii\helpers\Url::to('@web').'">
         ';
         $html .= '<label>';
         $html .= '' . Yii::t('app', 'add image gallery') . '';
