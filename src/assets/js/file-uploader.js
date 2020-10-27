@@ -258,7 +258,7 @@ function uploadMulti($form, $formName) {
                 $("#image-gallary").find("#loading").remove();
                 $.each(response, function (key, val) {
                     if (response[key].uploaded == 1) {
-                        $("#image-gallary").prepend('<div this-id="' + response[key].id + '" this-image="image-' + response[key].id + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="News[images][]" value="' + response[key].id + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + response[key].id + '"><i class="fa fa-close"></i></button><img src="' + response[key].url + '" ></div>')
+                        $("#image-gallary").prepend('<div this-id="' + response[key].id + '" this-image="image-' + response[key].id + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$formName+'[images][]" value="' + response[key].id + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + response[key].id + '"><i class="fa fa-close"></i></button><img src="' + response[key].url + '" ></div>')
                     }
                 })
             }
@@ -467,14 +467,14 @@ $("#image-gallary").on("click", ".remove-image-gallary", function () {
     $("#btn-select-files-one").click(function () {
         if ($(this).hasClass("one-selected")) {
             $("#main-image").html("<img src='" + $(this).attr("this-src") + "'>")
-            $("#news-image_id").val($(this).attr("this-id"))
+            $("#"+$(this).attr('form-name')+"-image_id").val($(this).attr("this-id"))
             $("#selectImageModal-one .image-box").removeClass("one-selected")
             $("#selectImageModal-one #btn-select-files-one").removeClass("one-selected")
         } else {
             $("#selectImageModal-one .image-box .selected").each(function () {
                 var image = $("#image-gallary").find(".contain-image-gallary[this-id=" + $(this).attr("this-id") + "]");
                 if (image.length == 0) {
-                    $("#image-gallary").prepend('<div this-id="' + $(this).attr("this-id") + '" this-image="image-' + $(this).attr("this-id") + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="News[images][]" value="' + $(this).attr("this-id") + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + $(this).attr("this-id") + '"><i class="fa fa-close"></i></button><img src="' + $(this).attr("this-src") + '" ></div>')
+                    $("#image-gallary").prepend('<div this-id="' + $(this).attr("this-id") + '" this-image="image-' + $(this).attr("this-id") + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$("#btn-select-files-one").attr("form-name")+'[images][]" value="' + $(this).attr("this-id") + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + $(this).attr("this-id") + '"><i class="fa fa-close"></i></button><img src="' + $(this).attr("this-src") + '" ></div>')
 
                 }
 
@@ -490,14 +490,14 @@ $("#image-gallary").on("click", ".remove-image-gallary", function () {
     $("#btn-select-files-multi").click(function () {
         if ($(this).hasClass("one-selected")) {
             $("#main-image").html("<img src='" + $(this).attr("this-src") + "'>")
-            $("#news-image_id").val($(this).attr("this-id"))
+            $("#"+$(this).attr('form-name')+"-image_id").val($(this).attr("this-id"))
             $("#selectImageModal-multi .image-box").removeClass("one-selected")
             $("#selectImageModal-multi #btn-select-files-multi").removeClass("one-selected")
         } else {
             $("#selectImageModal-multi .image-box .selected").each(function () {
                 var image = $("#image-gallary").find(".contain-image-gallary[this-id=" + $(this).attr("this-id") + "]");
                 if (image.length == 0) {
-                    $("#image-gallary").prepend('<div this-id="' + $(this).attr("this-id") + '" this-image="image-' + $(this).attr("this-id") + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="News[images][]" value="' + $(this).attr("this-id") + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + $(this).attr("this-id") + '"><i class="fa fa-close"></i></button><img src="' + $(this).attr("this-src") + '" ></div>')
+                    $("#image-gallary").prepend('<div this-id="' + $(this).attr("this-id") + '" this-image="image-' + $(this).attr("this-id") + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$("#btn-select-files-multi").attr("form-name")+'[images][]" value="' + $(this).attr("this-id") + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + $(this).attr("this-id") + '"><i class="fa fa-close"></i></button><img src="' + $(this).attr("this-src") + '" ></div>')
 
                 }
 
