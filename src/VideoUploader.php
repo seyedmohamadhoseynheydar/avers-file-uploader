@@ -45,7 +45,7 @@ class VideoUploader extends Widget
         $html .= '<button onclick=\'openUploadVideo("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
                   </button>';
-        $html .= '<button id="remove-video-' . $this->form_name . '" type="button" class="btn btn-danger btn-sm">
+        $html .= '<button id="remove-video" form-name="' . $this->form_name . '" type="button" class="btn btn-danger btn-sm">
                         <i class="fa fa-close"></i>
                   </button>';
         $html .= '<div id="main-video" style="margin-top: 10px">';
