@@ -121,7 +121,7 @@ class ImageUploader extends Widget
                         $html .= '<button type="button" class="btn btn-default close-modal-image-one">';
                             $html .= '' . Yii::t('app', 'Cancel') . '';
                         $html .= '</button>';
-                        $html .= '<button id="btn-select-files-one" type="button" class="btn btn-primary">';
+                        $html .= '<button id="btn-select-files-one" form-name="' . $this->form_name . '" type="button" class="btn btn-primary">';
                             $html .= '' . Yii::t('app', 'Submit') . '';
                         $html .= '</button>';
                     $html .= '</div>';
