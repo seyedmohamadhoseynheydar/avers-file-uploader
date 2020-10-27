@@ -116,7 +116,7 @@ class GalleryUploader extends Widget
                         $html .= '<button type="button" class="btn btn-default close-modal-image-multi">';
                             $html .= '' . Yii::t('app', 'Cancel') . '';
                         $html .= '</button>';
-                        $html .= '<button id="btn-select-files" type="button" class="btn btn-primary">';
+                        $html .= '<button id="btn-select-files-multi" type="button" class="btn btn-primary">';
                             $html .= '' . Yii::t('app', 'Submit') . '';
                         $html .= '</button>';
                     $html .= '</div>';
