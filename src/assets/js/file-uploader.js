@@ -462,7 +462,11 @@ $("#image-gallary").on("click", ".remove-image-gallary", function () {
     //add image from files
     $("#btn-select-files-one").click(function () {
         if ($(this).hasClass("one-selected")) {
-            $("#main-image").html("<img src='" + $(this).attr("this-src") + "'>")
+           if ($("#btn-select-files-one").attr("form-name") == 'category') {
+                $("#main-image").html("<img src='" + $(this).attr("this-src") + "' width='150px'>")
+            } else {
+                $("#main-image").html("<img src='" + $(this).attr("this-src") + "'>")
+            }
             $("#"+$(this).attr('form-name')+"-image_id").val($(this).attr("this-id"))
             $("#selectImageModal-one .image-box").removeClass("one-selected")
             $("#selectImageModal-one #btn-select-files-one").removeClass("one-selected")
