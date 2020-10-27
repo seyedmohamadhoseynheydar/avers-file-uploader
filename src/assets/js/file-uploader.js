@@ -185,20 +185,16 @@ function openUploadFile(form) {
 }
 
 function uploadImage($form, $formName, $service) {
-    var url = $("#data-url-img-avers").attr("url");
+     var url = $("#data-url-img-avers").attr("url");
     var webDir = $("#web-directory-avers").val();
-    if ($form == 'category' && $service == null) {
-        $main = 'main-image-category';
-        var formData = new FormData($("form")[1]);
-    } else {
-        $main = 'main-image';
-        var formData = new FormData($("form")[0]);
-    }
+
+    $main = 'main-image';
+    var formData = new FormData($("form")[0]);
+
     $ImageSize = '';
     if ($form != 'news' && $form != 'advertisement') {
-        $ImageSize = 'width:80px;'
+        $ImageSize = 'width:200px;'
     }
-
 
     else {
         $ImageSize = 'margin-top:10px';
