@@ -403,11 +403,11 @@ function uploadImageSetting($form, $formName, $main, $key, $image) {
 $(document).ready(function () {
     $("#remove-image").click(function () {
         $("#main-image").html("");
-        $("#news-image_id").val("");
+        $("#"+$(this).attr('form-name')+"-image_id").val("");
     });
     $("#remove-video").click(function () {
         $("#main-video").html("");
-        $("#news-video_id").val("");
+        $("#"+$(this).attr('form-name')+"-video_id").val("");
     });
 
     $(".close-modal-image-multi").click(function () {
