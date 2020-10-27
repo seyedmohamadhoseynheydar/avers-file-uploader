@@ -105,7 +105,7 @@ class ImageUploader extends Widget
                                     if ($files) {
                                         foreach ($files as $file) {
                                             $html .= '<div class="image-box" this-id="'.$file->id.'" this-src="'.$file->getImageUriById($file->id).'">';
-                                                $html .= '<img this-id="'.$file->id.'" this-src="'.$file->getImageUriById($file->id).'" src="'.$file->getImageUriById($file->id, 100, 100).'">';
+                                                $html .= '<img this-id="'.$file->id.'" this-src="'.$file->getImageUriById($file->id).'" src="'.$file->getImageUriById($file->id, 150).'">';
                                                 $html .= '<div class="overlay hidden">';
                                                      $html .= '<i class="fa fa-check"></i>';
                                                 $html .= '</div>';
