@@ -64,7 +64,11 @@ class ImageUploader extends Widget
                   </button>';
         $html .= '<div id="main-image" style="margin-top: 10px">';
         if ($this->mainImage_id) {
-            $html .= '' . $this->model->getImageTag(700) . '';
+            if ($this->form_name == 'category') {
+                $html .= '' . $this->model->getImageTag(200,200) . '';
+            } else {
+                $html .= '' . $this->model->getImageTag(700) . '';
+            }
         }
         $html .= '</div>';
         if ($this->form_name == 'news') {
