@@ -59,7 +59,7 @@ class ImageUploader extends Widget
         $html .= '<button type="button" id="select-one-image"
                         class="btn btn-primary btn-sm ml-4px"><i class="fa fa-folder-open"></i>
                   </button>';
-        $html .= '<button id="remove-image" type="button" class="btn btn-danger btn-sm">
+        $html .= '<button id="remove-image-' . $this->form_name . '" type="button" class="btn btn-danger btn-sm">
                         <i class="fa fa-close"></i>
                   </button>';
         $html .= '<div id="main-image" style="margin-top: 10px">';
