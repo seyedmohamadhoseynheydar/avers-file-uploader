@@ -65,7 +65,7 @@ class ImageUploader extends Widget
         $html .= '<div id="main-image" style="margin-top: 10px">';
         if ($this->mainImage_id) {
             if ($this->form_name == 'category') {
-                $html .= '' . $this->model->getImageTag(200,200) . '';
+                $html .= '' . $this->model->getImageTag(150) . '';
             } else {
                 $html .= '' . $this->model->getImageTag(700) . '';
             }
