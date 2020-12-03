@@ -19,6 +19,10 @@ class ImageUploader extends Widget
     public $form_name_capital;
     public $model;
     public $mainImage_id;
+    public $multiply; //true or false
+    public $multiply_index;
+    public $multiply_container;
+    
 
 
     public function init()
@@ -47,18 +51,35 @@ class ImageUploader extends Widget
         $html .= '<label>';
         $html .= '' . Yii::t('app', 'upload main image') . '';
         $html .= '</label>';
-        $html .= '<span class="hidden">';
-        $html .= '' . $this->form->field($this->model, 'image_id', ['template' => '{input}'])->hiddenInput() . '';
-        $html .= '</span>';
-        $html .= '<span class="hidden">';
-        $html .= '' . $this->form->field($this->model, 'mainimage')->fileInput(['onchange' => 'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '")']) . '';
-        $html .= '</span>';
-        $html .= '<button onclick=\'openUploadFile("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
+        if (isset($this->multiply, $this->multiply_index) && $this->multiply && $this->multiply_index) {
+            $html .= '<span class="hidden">';
+            $html .= '' . $this->form->field($this->model, 'image_id[0]["' . $this->multiply_index . '"]', ['template' => '{input}'])->hiddenInput() . '';
+            $html .= '</span>';
+            $html .= '<span class="hidden">';
+            $html .= '' . $this->form->field($this->model, 'mainimage[0]["' . $this->multiply_index . '"]')->fileInput(['this-id' => $this->multiply_index, 'this-parent' => 0, 'onchange' => 'uploadMultiImage(0, ' . $this->multiply_index . ', "' . $this->multiply_container . '", "' . $this->form_name . '", "' . $this->form_name_capital . '")']) . '';
+            $html .= '</span>';
+            $html .= '<button onclick=\'openUploadMultiFile(0, ' . $this->multiply_index . ', ' . $this->multiply_container . ', "' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
                   </button>';
-        $html .= '<button type="button" id="select-one-image"
-                        class="btn btn-primary btn-sm ml-4px"><i class="fa fa-folder-open"></i>
+            $html .= '<div id="main-image-0-' . $this->multiply_index . '" style="display: inline-block">';       
+            $html .= '</div>';
+        } else {
+            $html .= '<span class="hidden">';
+            $html .= '' . $this->form->field($this->model, 'image_id', ['template' => '{input}'])->hiddenInput() . '';
+            $html .= '</span>';
+            $html .= '<span class="hidden">';
+            $html .= '' . $this->form->field($this->model, 'mainimage')->fileInput(['onchange' => 'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '")']) . '';
+            $html .= '</span>';
+            $html .= '<button onclick=\'openUploadFile("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
+                        <i class="fa fa-upload"></i>
                   </button>';
+        }
+        
+        if (!isset($this->multiply) || empty($this->multiply) || !$this->multiply) {
+            $html .= '<button type="button" id="select-one-image"
+                            class="btn btn-primary btn-sm ml-4px"><i class="fa fa-folder-open"></i>
+                      </button>';
+        }
         $html .= '<button id="remove-image" form-name="' . $this->form_name . '" type="button" class="btn btn-danger btn-sm">
                         <i class="fa fa-close"></i>
                   </button>';
