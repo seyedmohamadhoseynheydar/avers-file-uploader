@@ -58,7 +58,7 @@ class ImageUploader extends Widget
             $html .= '<span class="hidden">';
             $html .= '' . $this->form->field($this->model, 'mainimage[0]["' . $this->multiply_index . '"]')->fileInput(['this-id' => $this->multiply_index, 'this-parent' => 0, 'onchange' => 'uploadMultiImage(0, ' . $this->multiply_index . ', "' . $this->multiply_container . '", "' . $this->form_name . '", "' . $this->form_name_capital . '")']) . '';
             $html .= '</span>';
-            $html .= '<button onclick=\'openUploadMultiFile(0, ' . $this->multiply_index . ', ' . $this->multiply_container . ', "' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
+            $html .= '<button onclick=\'openUploadMultiFile(0, ' . $this->multiply_index . ', "' . $this->multiply_container . '", "' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
                   </button>';
             $html .= '<div id="main-image-0-' . $this->multiply_index . '" style="display: inline-block">';       
