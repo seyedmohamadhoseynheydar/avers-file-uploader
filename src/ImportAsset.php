@@ -3,6 +3,7 @@
 
 namespace avers\fileUploader;
 
+use yii\base\Widget;
 
 class ImportAsset extends Widget
 {
