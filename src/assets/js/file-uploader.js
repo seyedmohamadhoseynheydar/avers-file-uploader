@@ -190,7 +190,7 @@ function uploadImage($form, $formName, $service, $formClass = null) {
 
     $main = 'main-image';
     if ($formcClass != null) {
-        var formData = new FormData($('form[class='+$formcClass+']'));   
+        var formData = new FormData($('form[class='+$formClass+']'));   
     } else {
         var formData = new FormData($("form")[0]);  
     }
