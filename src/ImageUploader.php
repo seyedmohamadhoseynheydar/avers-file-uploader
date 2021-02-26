@@ -14,7 +14,7 @@ class ImageUploader extends Widget
 
 
 
-    public $form
+    public $form;
     public $form_name;
     public $form_name_capital;
     public $formData_index;
