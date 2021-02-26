@@ -17,7 +17,7 @@ class ImageUploader extends Widget
     public $form;
     public $form_name;
     public $form_name_capital;
-    public $formData_index;
+    public $formClass;
     public $model;
     public $mainImage_id;
     public $multiply; //true or false
@@ -72,7 +72,7 @@ class ImageUploader extends Widget
             $html .= '' . $this->form->field($this->model, 'image_id', ['template' => '{input}'])->hiddenInput() . '';
             $html .= '</span>';
             $html .= '<span class="hidden">';
-            $html .= '' . $this->form->field($this->model, 'mainimage')->fileInput(['onchange' =>  'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '","","' . $this->formData_index . '")']) . '';
+            $html .= '' . $this->form->field($this->model, 'mainimage')->fileInput(['onchange' =>  'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '","","' . $this->formClass . '")']) . '';
             $html .= '</span>';
             $html .= '<button onclick=\'openUploadFile("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
