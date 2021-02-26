@@ -190,7 +190,7 @@ function uploadImage($form, $formName, $service, $formId) {
 
     $main = 'main-image';
     if ($formId != null) {
-        var formData = new FormData(document.getElementById($formId)));   
+        var formData = new FormData(document.getElementById($formId));   
     } else {
         var formData = new FormData($("form")[0]);  
     }
