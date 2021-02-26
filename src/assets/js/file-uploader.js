@@ -184,12 +184,16 @@ function openUploadFile(form) {
 
 }
 
-function uploadImage($form, $formName, $service, $formData_index = 0) {
+function uploadImage($form, $formName, $service, $formClass = null) {
      var url = $("#data-url-img-avers").attr("url");
     var webDir = $("#web-directory-avers").val();
 
     $main = 'main-image';
-    var formData = new FormData($("form")[$formData_index]);
+    if ($formcClass != null) {
+        var formData = new FormData($('form[class='+$formcClass+']'));   
+    } else {
+        var formData = new FormData($("form")[0]);  
+    }
 
     $ImageSize = '';
     if ($form != 'news' && $form != 'advertisement') {
