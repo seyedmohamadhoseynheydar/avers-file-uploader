@@ -189,7 +189,7 @@ function uploadImage($form, $formName, $service, $formClass = null) {
     var webDir = $("#web-directory-avers").val();
 
     $main = 'main-image';
-    if ($formcClass != null) {
+    if ($formClass != null) {
         var formData = new FormData($('form[class='+$formClass+']'));   
     } else {
         var formData = new FormData($("form")[0]);  
