@@ -72,7 +72,7 @@ function openUploadTheme(form) {
 function uploadTheme($form, $formName) {
     var url = $("#data-url-theme-avers").attr("url");
     var webDir = $("#web-directory-avers").val();
-    var formData = new FouploadMultiImagermData($("form")[0]);
+    var formData = new FormData($("form")[0]);
 
     $ImageSize = '';
 
