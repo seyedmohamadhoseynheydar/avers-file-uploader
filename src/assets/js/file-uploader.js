@@ -184,7 +184,7 @@ function openUploadFile(form) {
 
 }
 
-function uploadImage($form, $formName, $service, $formId) {
+function uploadImage($form, $formName, $service, $formId = null) {
      var url = $("#data-url-img-avers").attr("url");
     var webDir = $("#web-directory-avers").val();
 
