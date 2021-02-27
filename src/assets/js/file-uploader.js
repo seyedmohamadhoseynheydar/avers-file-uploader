@@ -184,12 +184,12 @@ function openUploadFile(form) {
 
 }
 
-function uploadImage($form, $formName, $service, $formId = null) {
+function uploadImage($form, $formName, $service, $formId = '') {
      var url = $("#data-url-img-avers").attr("url");
     var webDir = $("#web-directory-avers").val();
 
     $main = 'main-image';
-    if ($formId != null) {
+    if ($formId != '') {
         var formData = new FormData(document.getElementById($formId));   
     } else {
         var formData = new FormData($("form")[0]);  
