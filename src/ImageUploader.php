@@ -23,7 +23,7 @@ class ImageUploader extends Widget
     public $multiply; //true or false
     public $multiply_index;
     public $multiply_container;
-    
+
 
 
     public function init()
@@ -65,7 +65,7 @@ class ImageUploader extends Widget
             >
                         <i class="fa fa-upload"></i>
                   </button>';
-            $html .= '<div id="main-image-0-' . $this->multiply_index . '" style="display: inline-block">';       
+            $html .= '<div id="main-image-0-' . $this->multiply_index . '" style="display: inline-block">';
             $html .= '</div>';
         } else {
             $html .= '<span class="hidden">';
@@ -78,16 +78,16 @@ class ImageUploader extends Widget
                         <i class="fa fa-upload"></i>
                   </button>';
         }
-        
+
         if (!isset($this->multiply) || empty($this->multiply) || !$this->multiply) {
             $html .= '<button type="button" id="select-one-image"
                             class="btn btn-primary btn-sm ml-4px"><i class="fa fa-folder-open"></i>
                       </button>';
-             $html .= '<button id="remove-image" form-name="' . $this->form_name . '" type="button" class="btn btn-danger btn-sm">
+            $html .= '<button id="remove-image" form-name="' . $this->form_name . '" type="button" class="btn btn-danger btn-sm">
                         <i class="fa fa-close"></i>
                   </button>';
         }
-       
+
         $html .= '<div id="main-image" style="margin-top: 10px">';
         if ($this->mainImage_id) {
             if ($this->form_name == 'category') {
@@ -97,64 +97,64 @@ class ImageUploader extends Widget
             }
         }
         $html .= '</div>';
-        if ($this->form_name == 'news') {
+        if ($this->form_name == 'news' && !$this->multiply) {
             $html .= '<div class="label-inline">';
             $html .= '' . $this->form->field($this->model, "styles[image_position]")->radioList([
-                "center" => "مرکز", "top" => "بالا", "bottom" => "پایین", "right" => "راست", "left" => "چپ"
-            ])->label("بخش اصلی تصویر") . '';
+                    "center" => "مرکز", "top" => "بالا", "bottom" => "پایین", "right" => "راست", "left" => "چپ"
+                ])->label("بخش اصلی تصویر") . '';
             $html .= '</div>';
             $html .= '<p class="text-muted">';
             $html .= '(' . Yii::t("app", "Maximum 5 MB") . ')';
             $html .= '</p>';
         }
         $html .= '<div class="modal fade" id="selectImageModal-one" tabindex="-1" role="dialog" aria-hidden="true">';
-            $html .= '<div class="modal-dialog modal-md">';
-                $html .= '<div class="modal-content">';
+        $html .= '<div class="modal-dialog modal-md">';
+        $html .= '<div class="modal-content">';
 
-                    $html .= '<div class="modal-header">';
-                        $html .= '<button type="button" class="close close-modal-image-one">';
-                            $html .= '<span aria-hidden="true">&times;</span>';
-                        $html .= '</button>';
-                        $html .= '<h4 class="modal-title">'.Yii::t('app', 'Add image from files').'</h4>';
-                    $html .= '</div>';
+        $html .= '<div class="modal-header">';
+        $html .= '<button type="button" class="close close-modal-image-one">';
+        $html .= '<span aria-hidden="true">&times;</span>';
+        $html .= '</button>';
+        $html .= '<h4 class="modal-title">'.Yii::t('app', 'Add image from files').'</h4>';
+        $html .= '</div>';
 
-                    $html .= '<div class="modal-body" style="height: 300px;overflow-y: auto;">';
-                        $html .= '<div class="row">';
-                            $html .= '<div class="col-md-12">';
-                                $html .= '<div style="margin-right: 15px">';
-                                    $files = File::find()
-                                        ->where(['type' => File::TYPE_IMAGE])
-                                        ->andWhere(['!=', 'id', 1])
-                                        ->orderBy('id desc')
-                                        ->limit(50)
-                                        ->all();
-                                    if ($files) {
-                                        foreach ($files as $file) {
-                                            $html .= '<div class="image-box" this-id="'.$file->id.'" this-src="'.$file->getImageUriById($file->id).'">';
-                                                $html .= '<img this-id="'.$file->id.'" this-src="'.$file->getImageUriById($file->id).'" src="'.$file->getImageUriById($file->id, 150).'">';
-                                                $html .= '<div class="overlay hidden">';
-                                                     $html .= '<i class="fa fa-check"></i>';
-                                                $html .= '</div>';
-                                            $html .= '</div>';
-                                        }
-                                    }
-                                $html .= '</div>';
-                            $html .= '</div>';
-                        $html .= '</div>';
-                    $html .= '</div>';
-
-                    $html .= '<div class="modal-footer">';
-                        $html .= '<button type="button" class="btn btn-default close-modal-image-one">';
-                            $html .= '' . Yii::t('app', 'Cancel') . '';
-                        $html .= '</button>';
-                        $html .= '<button id="btn-select-files-one" form-name="' . $this->form_name . '" type="button" class="btn btn-primary">';
-                            $html .= '' . Yii::t('app', 'Submit') . '';
-                        $html .= '</button>';
-                    $html .= '</div>';
-
-
+        $html .= '<div class="modal-body" style="height: 300px;overflow-y: auto;">';
+        $html .= '<div class="row">';
+        $html .= '<div class="col-md-12">';
+        $html .= '<div style="margin-right: 15px">';
+        $files = File::find()
+            ->where(['type' => File::TYPE_IMAGE])
+            ->andWhere(['!=', 'id', 1])
+            ->orderBy('id desc')
+            ->limit(50)
+            ->all();
+        if ($files) {
+            foreach ($files as $file) {
+                $html .= '<div class="image-box" this-id="'.$file->id.'" this-src="'.$file->getImageUriById($file->id).'">';
+                $html .= '<img this-id="'.$file->id.'" this-src="'.$file->getImageUriById($file->id).'" src="'.$file->getImageUriById($file->id, 150).'">';
+                $html .= '<div class="overlay hidden">';
+                $html .= '<i class="fa fa-check"></i>';
                 $html .= '</div>';
-            $html .= '</div>';
+                $html .= '</div>';
+            }
+        }
+        $html .= '</div>';
+        $html .= '</div>';
+        $html .= '</div>';
+        $html .= '</div>';
+
+        $html .= '<div class="modal-footer">';
+        $html .= '<button type="button" class="btn btn-default close-modal-image-one">';
+        $html .= '' . Yii::t('app', 'Cancel') . '';
+        $html .= '</button>';
+        $html .= '<button id="btn-select-files-one" form-name="' . $this->form_name . '" type="button" class="btn btn-primary">';
+        $html .= '' . Yii::t('app', 'Submit') . '';
+        $html .= '</button>';
+        $html .= '</div>';
+
+
+        $html .= '</div>';
+        $html .= '</div>';
         $html .= '</div>';
         return $html;
     }
