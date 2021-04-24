@@ -84,7 +84,7 @@ class GalleryUploader extends Widget
                             $html .= ' <diV><input '.$checked.' class="form-check-input" type="radio" name="'.$this->form_name_capital.'[image_id]" value="'.$file->id.'" id="main_image_'.$file->id.'">';
                             $html .= '</diV><div><label for="main_image_'.$file->id.'">تصویر اصلی</label></diV>';
                         }
-                        $html .= '<img style="" src="'.$this->model->getImageUriById($file->id, null, 150, File::RESIZE_INSIDE) .'">';
+                        $html .= '<img style="width:50%" src="'.$this->model->getImageUriById($file->id, null, null, File::RESIZE_INSIDE) .'">';
                         $html .= '</div>';
                     }
                 }
