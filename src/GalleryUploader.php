@@ -48,7 +48,7 @@ class GalleryUploader extends Widget
         $html .= '' . Yii::t('app', 'add image gallery') . '';
         $html .= '</label>';
         $html .= '<span class="hidden">';
-        $html .= '' . $this->form->field($this->model, 'files[]')->fileInput(['multiple' => true,'onchange' => 'uploadMulti("' . $this->form_name . '","' . $this->form_name_capital . '")']) . '';
+        $html .= '' . $this->form->field($this->model, 'files[]')->fileInput(['multiple' => true,'onchange' => 'uploadMulti("' . $this->form_name . '","' . $this->form_name_capital . '", "'.$this->select_main_image.'")']) . '';
         $html .= '</span>';
         $html .= '<button onclick=\'openMultiUpload("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
