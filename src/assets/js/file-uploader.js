@@ -262,7 +262,7 @@ function uploadMulti($form, $formName, $select_main_image) {
                                 $("#image-gallary").prepend('<div this-id="' + response[key].id + '" this-image="image-' + response[key].id + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input type="text" class="input-image-gallary" name="'+$formName+'[images][]" value="' + response[key].id + '"></div>' +
                             '<button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + response[key].id + '"><i class="fa fa-close"></i></button>' +
                             '<diV><input type="radio" id="main_image_' + response[key].id + '" name="'+$formName+'[image_id]" value="' + response[key].id + '">' +
-                            '<label for="main_image_' + response[key].id + '">تصویر اصلی</label></diV>' +
+                            '</diV><diV style="margin-right: 20px;"><label for="main_image_' + response[key].id + '">تصویر اصلی</label></diV>' +
                             '<img style="width:50%" src="' + response[key].url + '" ></div>')
                             } else {
                                 $("#image-gallary").prepend('<div this-id="' + response[key].id + '" this-image="image-' + response[key].id + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$formName+'[images][]" value="' + response[key].id + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + response[key].id + '"><i class="fa fa-close"></i></button><img src="' + response[key].url + '" ></div>')
