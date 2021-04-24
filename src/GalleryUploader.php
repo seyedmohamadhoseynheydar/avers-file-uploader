@@ -18,6 +18,8 @@ class GalleryUploader extends Widget
     public $model;
     public $mainImage_id;
     public $select_from_site = "true";
+    public $select_main_image = "false";
+    
 
 
     public function init()
@@ -72,6 +74,11 @@ class GalleryUploader extends Widget
                         $html .= '<button type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-'.$file->id.'">';
                         $html .= '<i class="fa fa-close"></i>';
                         $html .= '</button>';
+                        
+                        if ($this->select_main_image == "true") {
+                            $html .= ' <input class="form-check-input" type="radio" name="'.$this->form_name_capital.'[image_id]" value="'.$file->id.'" id="main_image_'.$file->id.'">';
+                            $html .= '<label for="main_image_'.$file->id.'">تصویر اصلی</label>';
+                        }
                         $html .= '<img style="" src="'.$this->model->getImageUriById($file->id, null, 150, File::RESIZE_INSIDE) .'">';
                         $html .= '</div>';
                     }
