@@ -76,7 +76,12 @@ class GalleryUploader extends Widget
                         $html .= '</button>';
                         
                         if ($this->select_main_image == "true") {
-                            $html .= ' <diV><input class="form-check-input" type="radio" name="'.$this->form_name_capital.'[image_id]" value="'.$file->id.'" id="main_image_'.$file->id.'">';
+                            if ($this->model->image_id == $file->id) {
+                                $checked = "checked";
+                            } else {
+                                $checked = "";
+                            }
+                            $html .= ' <diV><input '.$checked.' class="form-check-input" type="radio" name="'.$this->form_name_capital.'[image_id]" value="'.$file->id.'" id="main_image_'.$file->id.'">';
                             $html .= '<label for="main_image_'.$file->id.'">تصویر اصلی</label></diV>';
                         }
                         $html .= '<img style="" src="'.$this->model->getImageUriById($file->id, null, 150, File::RESIZE_INSIDE) .'">';
