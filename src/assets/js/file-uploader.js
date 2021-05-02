@@ -13,12 +13,16 @@ var id_tag;
 
 
 //function upload image
-function uploadMultiImage($p, $i, $pd, $form, $formName) {
+function uploadMultiImage($p, $i, $pd, $form, $formName, $formId = '') {
 
     var url = $("#data-url-multi-img-avers").attr("url")
     var id = $i
     var parent = $p
-    var formData = new FormData($("form")[0]);
+    if ($formId != '') {
+        var formData = new FormData(document.getElementById($formId));
+    } else {
+        var formData = new FormData($("form")[0]);
+    }
     var containerContent = $("#" + $pd).find("#main-image-" + parent + "-" + id).html();
 
 
@@ -69,10 +73,14 @@ function openUploadTheme(form) {
     $("#" + form + "-zipped_file").trigger('click');
 }
 
-function uploadTheme($form, $formName) {
+function uploadTheme($form, $formName, $formId = '') {
     var url = $("#data-url-theme-avers").attr("url");
     var webDir = $("#web-directory-avers").val();
-    var formData = new FormData($("form")[0]);
+    if ($formId != '') {
+        var formData = new FormData(document.getElementById($formId));
+    } else {
+        var formData = new FormData($("form")[0]);
+    }
 
     $ImageSize = '';
 
@@ -131,11 +139,15 @@ function openUploadFileForItems($p, $i, $pd, $form) {
 
 }
 
-function uploadFileForItems($p, $i, $pd, $form, $formName) {
+function uploadFileForItems($p, $i, $pd, $form, $formName, $formId = '') {
     var url = $("#data-url-file-for-items-avers").attr("url");
     var id = $i
     var parent = $p
-    var formData = new FormData($("form")[0]);
+    if ($formId != '') {
+        var formData = new FormData(document.getElementById($formId));
+    } else {
+        var formData = new FormData($("form")[0]);
+    }
     var containerContent = $("#" + $pd).find("#main-file-" + parent + "-" + id).html();
     var downloadFileTranslate = $('#add-item').attr('download-file');
 
@@ -239,9 +251,13 @@ function uploadImage($form, $formName, $service, $formId = '') {
 
 }
 
-function uploadMulti($form, $formName, $select_main_image) {
+function uploadMulti($form, $formName, $select_main_image, $formId = '') {
     var url = $("#upload-multi-image-avers").attr("url");
-    var formData = new FormData($("form")[0]);
+    if ($formId != '') {
+        var formData = new FormData(document.getElementById($formId));
+    } else {
+        var formData = new FormData($("form")[0]);
+    }
     var containerContent = $("#image-gallary").html();
     var webDir = $("#web-directory-avers").val();
     $.ajax({
@@ -292,10 +308,14 @@ function openUploadVideo(form) {
     $("#" + form + "-main_video").trigger('click');
 }
 
-function uploadVideo(form, formName) {
+function uploadVideo(form, formName, $formId = '') {
     var url = $("#ajax-upload-url-avers").attr("url");
     var selector = 'main-video';
-    var formData = new FormData($("form")[0]);
+    if ($formId != '') {
+        var formData = new FormData(document.getElementById($formId));
+    } else {
+        var formData = new FormData($("form")[0]);
+    }
     var containerContent = $("#" + selector).html();
     var webDir = $("#web-directory-avers").val();
 
@@ -351,9 +371,13 @@ function openUploadFileSetting($form, $image) {
 
 }
 
-function uploadImageSetting($form, $formName, $main, $key, $image) {
+function uploadImageSetting($form, $formName, $main, $key, $image, $formId = '') {
     var url = $("#data-url-img-setting-avers").attr("url")
-    var formData = new FormData($("form")[0]);
+    if ($formId != '') {
+        var formData = new FormData(document.getElementById($formId));
+    } else {
+        var formData = new FormData($("form")[0]);
+    }
     $ImageSize = 'width:100px;'
     var containerContent = $("#" + $main).html();
 
