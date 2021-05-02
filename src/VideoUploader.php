@@ -16,6 +16,7 @@ class VideoUploader extends Widget
     public $form;
     public $form_name;
     public $form_name_capital;
+    public $formId;
     public $model;
 
 
@@ -40,7 +41,7 @@ class VideoUploader extends Widget
         $html .= '' . $this->form->field($this->model, 'video_id', ['template' => '{input}'])->hiddenInput() . '';
         $html .= '</span>';
         $html .= '<span class="hidden">';
-        $html .= '' . $this->form->field($this->model, 'main_video')->fileInput(['onchange' => 'uploadVideo("' . $this->form_name . '","' . $this->form_name_capital . '")']) . '';
+        $html .= '' . $this->form->field($this->model, 'main_video')->fileInput(['onchange' => 'uploadVideo("' . $this->form_name . '","' . $this->form_name_capital . '","' . $this->formId . '")']) . '';
         $html .= '</span>';
         $html .= '<button onclick=\'openUploadVideo("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
