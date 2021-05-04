@@ -671,13 +671,27 @@ class FileController extends Controller
             if ($hrate < $wrate) { // horizentall
                 $newWidth = (int)(($height / $size->getHeight()) * $size->getWidth());
                 $newHeight = $height;
-                $pointX = (int)(($newWidth - $width) / 2);
+//                 $pointX = (int)(($newWidth - $width) / 2);
                 $pointY = 0;
+                if ($file->position == 'right') {
+                    $pointX = (int)($newWidth - $width);
+                } elseif ($file->position == 'left') {
+                    $pointX = 0;
+                } else {
+                    $pointX = (int)(($newWidth - $width) / 2);
+                }
             } else {
                 $newWidth = $width;
                 $newHeight = (int)(($width / $size->getWidth()) * $size->getHeight());
                 $pointX = 0;
-                $pointY = (int)(($newHeight - $height) / 2);
+//                 $pointY = (int)(($newHeight - $height) / 2);
+                  if ($file->position == 'top') {
+                    $pointY = 0;
+                } elseif ($file->position == 'bottom') {
+                    $pointY = (int)($newHeight - $height);
+                } else {
+                    $pointY = (int)(($newHeight - $height) / 2);
+                }
             }
             $newImage->thumbnail(new Box($newWidth, $newHeight))
                 ->crop(new Point($pointX, $pointY), new Box($width, $height))
