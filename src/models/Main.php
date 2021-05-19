@@ -346,7 +346,7 @@ class Main extends \yii\db\ActiveRecord
         $params['id'] = $file->uri;
         $params['name'] = $file->name;
         $src = Url::to(array_merge(['file/video'], $params));
-        return '<video src="' . $src . '" ' . ($controls ? 'controls' : '') . ' ' . ($autoplay ? 'autoplay' : '') . '></video>';
+        return '<video style="width:100%" src="' . $src . '" ' . ($controls ? 'controls' : '') . ' ' . ($autoplay ? 'autoplay' : '') . '></video>';
     }
 
     public function findDayStatistic($day)
