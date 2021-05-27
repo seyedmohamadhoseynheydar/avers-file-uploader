@@ -23,6 +23,8 @@ class ImageUploader extends Widget
     public $multiply; //true or false
     public $multiply_index;
     public $multiply_container;
+    public $attribute = 'image_id';
+    
 
 
 
@@ -30,8 +32,8 @@ class ImageUploader extends Widget
     {
         parent::init();
         Asset::register( $this->getView() );
-        if ($this->model->image_id != null) {
-            $this->mainImage_id = $this->model->image_id;
+        if ($this->model->{$this->attribute} != null) {
+            $this->mainImage_id = $this->model->{$this->attribute};
         } else {
             $this->mainImage_id = false;
         }
@@ -69,7 +71,7 @@ class ImageUploader extends Widget
             $html .= '</div>';
         } else {
             $html .= '<span class="hidden">';
-            $html .= '' . $this->form->field($this->model, 'image_id', ['template' => '{input}'])->hiddenInput() . '';
+            $html .= '' . $this->form->field($this->model, $this->attribute, ['template' => '{input}'])->hiddenInput() . '';
             $html .= '</span>';
             $html .= '<span class="hidden">';
             $html .= '' . $this->form->field($this->model, 'mainimage')->fileInput(['onchange' =>  'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '","","' . $this->formId . '")']) . '';
