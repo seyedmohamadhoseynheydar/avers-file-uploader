@@ -197,14 +197,14 @@ function openUploadFile(form) {
 }
 
 function uploadImage($form, $formName, $service, $formId = '') {
-     var url = $("#data-url-img-avers").attr("url");
+    var url = $("#data-url-img-avers").attr("url");
     var webDir = $("#web-directory-avers").val();
 
     $main = 'main-image';
     if ($formId != '') {
-        var formData = new FormData(document.getElementById($formId));   
+        var formData = new FormData(document.getElementById($formId));
     } else {
-        var formData = new FormData($("form")[0]);  
+        var formData = new FormData($("form")[0]);
     }
 
     $ImageSize = '';
@@ -251,7 +251,7 @@ function uploadImage($form, $formName, $service, $formId = '') {
 
 }
 
-function uploadMulti($form, $formName, $select_main_image, $formId = '') {
+function uploadMulti($form, $formName, $select_main_image, $formId = '', $skin = '') {
     var url = $("#upload-multi-image-avers").attr("url");
     if ($formId != '') {
         var formData = new FormData(document.getElementById($formId));
@@ -265,7 +265,7 @@ function uploadMulti($form, $formName, $select_main_image, $formId = '') {
         type: "POST",
         data: formData,
         beforeSend: function () {
-            $("#image-gallary").prepend('<div id="loading" class="col-md-6 " style="margin-top:10px;"><img id="loading" src="' + webDir + 'images/loading.svg" ></div>');
+            $("#image-gallary").prepend('<div id="loading" class="col-md-4 " style="margin-top:10px;"><img id="loading" src="' + webDir + 'images/loading.svg" ></div>');
         },
         success: function (response) {
             if (response.uploaded == 0) {
@@ -275,14 +275,48 @@ function uploadMulti($form, $formName, $select_main_image, $formId = '') {
                 $.each(response, function (key, val) {
                     if (response[key].uploaded == 1) {
                         if ($select_main_image == "true") {
-                                $("#image-gallary").prepend('<div this-id="' + response[key].id + '" this-image="image-' + response[key].id + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input type="text" class="input-image-gallary" name="'+$formName+'[images][]" value="' + response[key].id + '"></div>' +
-                            '<button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + response[key].id + '"><i class="fa fa-close"></i></button>' +
-                            '<diV><input type="radio" id="main_image_' + response[key].id + '" name="'+$formName+'[image_id]" value="' + response[key].id + '">' +
-                            '</diV><diV style="margin-right: 20px;"><label for="main_image_' + response[key].id + '">تصویر اصلی</label></diV>' +
-                            '<img style="width:50%" src="' + response[key].url + '" ></div>')
+
+                            if ($skin == 'bazar-rouz-iranian'){
+                                $("#image-gallary").prepend('' +
+                                    '<div this-id="' + response[key].id + '" this-image="image-' + response[key].id + '" class="col-md-4 contain-image-gallary" style="margin-top:10px;">' +
+                                    '<div class="hidden">' +
+                                    '<input type="text" class="input-image-gallary" name="'+$formName+'[images][]" value="' + response[key].id + '"></div>' +
+
+                                    '<div class="row">' +
+                                    '<div class="col-md-2 col-2">' +
+                                    '<button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + response[key].id + '">' +
+                                    '<i class="fa fa-close"></i>' +
+                                    '</button>' +
+                                    '</div>' +
+                                    '<div class="col-md-10 col-10">' +
+                                    '<label for="main_image_' + response[key].id + '">تصویر اصلی</label>' +
+                                    '<input type="radio" id="main_image_' + response[key].id + '" name="'+$formName+'[image_id]" value="' + response[key].id + '">' +
+                                    '</div>' +
+                                    '<div class="col-md-12 col-12">' +
+                                    '<img style="max-height: 190px;border:1px solid #18E3A4;border-radius: 10px" src="' + response[key].url + '" >' +
+                                    '</div>' +
+                                    '</div>')
                             } else {
-                                $("#image-gallary").prepend('<div this-id="' + response[key].id + '" this-image="image-' + response[key].id + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$formName+'[images][]" value="' + response[key].id + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + response[key].id + '"><i class="fa fa-close"></i></button><img src="' + response[key].url + '" ></div>')
+                                $("#image-gallary").prepend('' +
+                                    '<div this-id="' + response[key].id + '" this-image="image-' + response[key].id + '" class="col-md-4 contain-image-gallary" style="margin-top:10px;">' +
+                                    '<div class="hidden">' +
+                                    '<input type="text" class="input-image-gallary" name="'+$formName+'[images][]" value="' + response[key].id + '"></div>' +
+                                    '<button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + response[key].id + '">' +
+                                    '<i class="fa fa-close"></i>' +
+                                    '</button>' +
+                                    '<div>' +
+                                    '<input type="radio" id="main_image_' + response[key].id + '" name="'+$formName+'[image_id]" value="' + response[key].id + '">' +
+                                    '</div>' +
+                                    '<div style="margin-right: 20px;">' +
+                                    '<label for="main_image_' + response[key].id + '">تصویر اصلی</label>' +
+                                    '<img style="max-height: 150px" src="' + response[key].url + '" >' +
+                                    '</div>')
                             }
+
+
+                        } else {
+                            $("#image-gallary").prepend('<div this-id="' + response[key].id + '" this-image="image-' + response[key].id + '" class="col-md-4 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$formName+'[images][]" value="' + response[key].id + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + response[key].id + '"><i class="fa fa-close"></i></button><img src="' + response[key].url + '" ></div>')
+                        }
                     }
                 })
             }
@@ -489,8 +523,8 @@ $(document).ready(function () {
         }
     });
     // delete image gallary
-$("#image-gallary").on("click", ".remove-image-gallary", function () {
-    var image = $(this).attr("this-image")
+    $("#image-gallary").on("click", ".remove-image-gallary", function () {
+        var image = $(this).attr("this-image")
         $(".contain-image-gallary[this-image=" + image + "]").find(".input-image-gallary").remove()
         $(".contain-image-gallary[this-image=" + image + "]").remove();
     })
@@ -498,7 +532,7 @@ $("#image-gallary").on("click", ".remove-image-gallary", function () {
     //add image from files
     $("#btn-select-files-one").click(function () {
         if ($(this).hasClass("one-selected")) {
-           if ($("#btn-select-files-one").attr("form-name") == 'category') {
+            if ($("#btn-select-files-one").attr("form-name") == 'category') {
                 $("#main-image").html("<img src='" + $(this).attr("this-src") + "' width='150px'>")
             } else {
                 $("#main-image").html("<img src='" + $(this).attr("this-src") + "'>")
@@ -510,7 +544,7 @@ $("#image-gallary").on("click", ".remove-image-gallary", function () {
             $("#selectImageModal-one .image-box .selected").each(function () {
                 var image = $("#image-gallary").find(".contain-image-gallary[this-id=" + $(this).attr("this-id") + "]");
                 if (image.length == 0) {
-                    $("#image-gallary").prepend('<div this-id="' + $(this).attr("this-id") + '" this-image="image-' + $(this).attr("this-id") + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$("#btn-select-files-one").attr("form-name")+'[images][]" value="' + $(this).attr("this-id") + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + $(this).attr("this-id") + '"><i class="fa fa-close"></i></button><img src="' + $(this).attr("this-src") + '" ></div>')
+                    $("#image-gallary").prepend('<div this-id="' + $(this).attr("this-id") + '" this-image="image-' + $(this).attr("this-id") + '" class="col-md-4 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$("#btn-select-files-one").attr("form-name")+'[images][]" value="' + $(this).attr("this-id") + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + $(this).attr("this-id") + '"><i class="fa fa-close"></i></button><img src="' + $(this).attr("this-src") + '" ></div>')
 
                 }
 
@@ -521,7 +555,7 @@ $("#image-gallary").on("click", ".remove-image-gallary", function () {
         $("#selectImageModal-one").modal("hide")
 
     })
-    
+
     //add image from files
     $("#btn-select-files-multi").click(function () {
         if ($(this).hasClass("one-selected")) {
@@ -533,7 +567,7 @@ $("#image-gallary").on("click", ".remove-image-gallary", function () {
             $("#selectImageModal-multi .image-box .selected").each(function () {
                 var image = $("#image-gallary").find(".contain-image-gallary[this-id=" + $(this).attr("this-id") + "]");
                 if (image.length == 0) {
-                    $("#image-gallary").prepend('<div this-id="' + $(this).attr("this-id") + '" this-image="image-' + $(this).attr("this-id") + '" class="col-md-6 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$("#btn-select-files-multi").attr("form-name")+'[images][]" value="' + $(this).attr("this-id") + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + $(this).attr("this-id") + '"><i class="fa fa-close"></i></button><img src="' + $(this).attr("this-src") + '" ></div>')
+                    $("#image-gallary").prepend('<div this-id="' + $(this).attr("this-id") + '" this-image="image-' + $(this).attr("this-id") + '" class="col-md-4 contain-image-gallary" style="margin-top:10px;"><div class="hidden"><input typ="text" class="input-image-gallary" name="'+$("#btn-select-files-multi").attr("form-name")+'[images][]" value="' + $(this).attr("this-id") + '"></div><button  type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-' + $(this).attr("this-id") + '"><i class="fa fa-close"></i></button><img src="' + $(this).attr("this-src") + '" ></div>')
 
                 }
 
