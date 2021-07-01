@@ -20,7 +20,9 @@ class GalleryUploader extends Widget
     public $mainImage_id;
     public $select_from_site = "true";
     public $select_main_image = "false";
-    
+    public $title;
+    public $skin;
+
 
 
     public function init()
@@ -45,15 +47,23 @@ class GalleryUploader extends Widget
                url="'.\yii\helpers\Url::to(['file/upload-all', 'key' => 'files', 'allowedType' => 'image']).'">
             <input type="hidden" id="web-directory-avers" value="'.\yii\helpers\Url::to('@web/').'">
         ';
-        $html .= '<label>';
-        $html .= '' . Yii::t('app', 'add image gallery') . '';
-        $html .= '</label>';
+        if ($this->title !== false){
+            $html .= '<label>';
+            if (!empty($this->title)){
+                $html .= '' . $this->title . '';
+            } else {
+                $html .= '' . Yii::t('app', 'add image gallery') . '';
+            }
+            $html .= '</label>';
+        }
         $html .= '<span class="hidden">';
-        $html .= '' . $this->form->field($this->model, 'files[]')->fileInput(['multiple' => true,'onchange' => 'uploadMulti("' . $this->form_name . '","' . $this->form_name_capital . '", "'.$this->select_main_image.'","' . $this->formId . '")']) . '';
+        $html .= '' . $this->form->field($this->model, 'files[]')->fileInput(['multiple' => true,'onchange' => 'uploadMulti("' . $this->form_name . '","' . $this->form_name_capital . '", "'.$this->select_main_image.'","' . $this->formId . '","' . $this->skin . '")']) . '';
         $html .= '</span>';
-        $html .= '<button onclick=\'openMultiUpload("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
+        if ($this->skin != 'bazar-rouz-iranian'){
+            $html .= '<button onclick=\'openMultiUpload("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
                   </button>';
+        }
         if ($this->select_from_site == "true") {
              $html .= '<button type="button" id="select-multi-image"
                             class="btn btn-primary btn-sm ml-4px"><i class="fa fa-folder-open"></i>
@@ -68,29 +78,47 @@ class GalleryUploader extends Widget
                 if ($files) {
                     foreach ($files as $file) {
 
-                        $html .= '<div this-image="image-'.$file->id.'" this-id="'.$file->id.'" class="col-md-6 contain-image-gallary" style="margin-top:10px">';
+                        $html .= '<div this-image="image-'.$file->id.'" this-id="'.$file->id.'" class="col-md-4 contain-image-gallary" style="margin-top:10px">';
                         $html .= '<div class="hidden">';
                         $html .= '<input typ="text" class="input-image-gallary" name="'.$this->form_name_capital.'[images][]" value="'.$file->id.'">';
                         $html .= '</div>';
-                        $html .= '<button type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-'.$file->id.'">';
-                        $html .= '<i class="fa fa-close"></i>';
-                        $html .= '</button>';
-                        
+
                         if ($this->select_main_image == "true") {
                             if ($this->model->image_id == $file->id) {
                                 $checked = "checked";
                             } else {
                                 $checked = "";
                             }
-                            $html .= ' <diV><input '.$checked.' class="form-check-input" type="radio" name="'.$this->form_name_capital.'[image_id]" value="'.$file->id.'" id="main_image_'.$file->id.'">';
-                            $html .= '</diV><div style="margin-right: 20px;"><label for="main_image_'.$file->id.'">تصویر اصلی</label></diV>';
+                            $html .= ' <div class="row">
+                                            <div class="col-md-2 col-2">
+                                                <button type="button" class="btn btn-danger btn-sm remove-image-gallary" this-image="image-'.$file->id.'">
+                                                    <i class="fa fa-close"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-10 col-10">
+                                                <label for="main_image_'.$file->id.'">تصویر اصلی</label>
+                                                <input '.$checked.' class="form-check-input" type="radio" name="'.$this->form_name_capital.'[image_id]" value="'.$file->id.'" id="main_image_'.$file->id.'">
+                                            </div>
+                                        </div>
+                                        ';
                         }
-                        $html .= '<img style="width:50%" src="'.$this->model->getImageUriById($file->id, null, null, File::RESIZE_INSIDE) .'">';
+                        if ($this->skin == 'bazar-rouz-iranian'){
+                            $html .= '<img style="max-height: 190px;border:1px solid #18E3A4;border-radius:10px;margin-top:10px;margin-bottom:10px" src="'.$this->model->getImageUriById($file->id, null, null, File::RESIZE_INSIDE) .'">';
+                        } else {
+                            $html .= '<img style="with:50%" src="'.$this->model->getImageUriById($file->id, null, null, File::RESIZE_INSIDE) .'">';
+                        }
                         $html .= '</div>';
                     }
                 }
 
             }
+        }
+        if ($this->skin == 'bazar-rouz-iranian'){
+            $html .= '<div class="col-md-4" style="margin-top: 10px;margin-bottom: 10px">';
+            $html .= '<button onclick=\'openMultiUpload("' . $this->form_name . '")\' type="button" class="btn" style="padding: 70px 70px;border: 1px solid #18E3A4;border-radius: 10px">
+                        <i class="fa fa-plus-square-o" style="color: #18E3A4; font-size: 100px"></i>
+                  </button>';
+            $html .= '</div>';
         }
         $html .= '</div>';
          if ($this->select_from_site == "true") {
