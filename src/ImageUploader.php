@@ -23,7 +23,7 @@ class ImageUploader extends Widget
     public $multiply; //true or false
     public $multiply_index;
     public $multiply_container;
-    public $attribute = '';
+    public $attribute;
    
     
 
@@ -33,7 +33,10 @@ class ImageUploader extends Widget
     {
         parent::init();
         Asset::register( $this->getView() );
-        if ($this->attribute != '' && $this->model->{$this->attribute} != '') {
+        if (empty($this->attribute)) {
+            $this->attribute = 'image_id';
+        }
+        if (isset($this->model->{$this->attribute})) {
             $this->mainImage_id = $this->model->{$this->attribute};
         } else {
             $this->mainImage_id = false;
