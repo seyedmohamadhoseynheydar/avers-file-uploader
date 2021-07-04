@@ -33,7 +33,7 @@ class ImageUploader extends Widget
     {
         parent::init();
         Asset::register( $this->getView() );
-        if ($this->model->{$this->attribute} != '') {
+        if ($this->attribute != '' && $this->model->{$this->attribute} != '') {
             $this->mainImage_id = $this->model->{$this->attribute};
         } else {
             $this->mainImage_id = false;
