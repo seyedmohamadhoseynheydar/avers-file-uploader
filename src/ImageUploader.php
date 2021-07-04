@@ -23,6 +23,7 @@ class ImageUploader extends Widget
     public $multiply; //true or false
     public $multiply_index;
     public $multiply_container;
+    public $attribute;
    
     
 
