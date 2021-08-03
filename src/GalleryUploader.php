@@ -15,7 +15,7 @@ class GalleryUploader extends Widget
     public $form;
     public $form_name;
     public $form_name_capital;
-    public $formId;
+    public $formId = "null";
     public $model;
     public $mainImage_id;
     public $select_from_site = "true";
