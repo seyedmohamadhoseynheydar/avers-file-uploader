@@ -60,6 +60,8 @@ class GalleryUploader extends Widget
         $html .= '' . $this->form->field($this->model, 'files[]')->fileInput(['multiple' => true,'onchange' => 'uploadMulti("' . $this->form_name . '","' . $this->form_name_capital . '", "'.$this->select_main_image.'","' . $this->formId . '","' . $this->skin . '")']) . '';
         $html .= '</span>';
         if ($this->skin != 'bazar-rouz-iranian'){
+
+
             $html .= '<button onclick=\'openMultiUpload("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
                   </button>';
@@ -114,8 +116,9 @@ class GalleryUploader extends Widget
             }
         }
         if ($this->skin == 'bazar-rouz-iranian'){
-             $html .= '<div onclick=\'openMultiUpload("' . $this->form_name . '")\' class="text-center col-md-4" style="cursor:pointer; color: #18E3A4;margin-top: 10px;margin-bottom: 10px;border: 1px solid #18E3A4;border-radius: 10px;padding:3rem 1rem">';
-            $html .= '<i class="fa fa-plus-square-o" style="color: #18E3A4; font-size: 100px"></i>';
+             $html .= '<div onclick=\'openMultiUpload("' . $this->form_name . '")\' class="text-center col-md-4" style="cursor:pointer; color: #18E3A4;margin-top: 10px;margin-bottom: 10px;border: 1px solid #18E3A4;border-radius: 10px;padding:3rem 1rem;display: table;">';
+            $html .= '<i class="fa fa-plus-square-o" style="color: #18E3A4; font-size: 100px;display: table-cell;
+vertical-align: middle;"></i>';
             $html .= '</div>';
         }
         $html .= '</div>';
