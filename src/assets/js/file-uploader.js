@@ -251,9 +251,9 @@ function uploadImage($form, $formName, $service, $formId = '') {
 
 }
 
-function uploadMulti($form, $formName, $select_main_image, $formId = '', $skin = '') {
+function uploadMulti($form, $formName, $select_main_image, $formId, $skin = '') {
     var url = $("#upload-multi-image-avers").attr("url");
-    if ($formId != '') {
+    if ($formId != 'null') {
         var formData = new FormData(document.getElementById($formId));
     } else {
         var formData = new FormData($("form")[0]);
