@@ -114,8 +114,8 @@ class GalleryUploader extends Widget
             }
         }
         if ($this->skin == 'bazar-rouz-iranian'){
-            $html .= '<div onclick=\'openMultiUpload("' . $this->form_name . '")\' class="col-md-4 fa fa-plus-square-o" style="color: #18E3A4;margin-top: 10px;margin-bottom: 10px;border: 1px solid #18E3A4;border-radius: 10px">';        
-                               
+             $html .= '<div onclick=\'openMultiUpload("' . $this->form_name . '")\' class="text-center col-md-4" style="cursor:pointer; color: #18E3A4;margin-top: 10px;margin-bottom: 10px;border: 1px solid #18E3A4;border-radius: 10px;padding:3rem 1rem">';
+            $html .= '<i class="fa fa-plus-square-o" style="color: #18E3A4; font-size: 100px"></i>';
             $html .= '</div>';
         }
         $html .= '</div>';
