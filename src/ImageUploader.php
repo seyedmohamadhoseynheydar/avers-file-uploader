@@ -106,9 +106,9 @@ class ImageUploader extends Widget
         }
         if ($this->mainImage_id) {
             if ($this->form_name == 'category') {
-                $html .= '' . $this->model->getImageTag(150) . '';
+                $html .= '' . $this->model->getImageTagBase($this->mainImage_id, 150) . '';
             } else {
-                $html .= '' . $this->model->getImageTag(700) . '';
+                $html .= '' . $this->model->getImageTagBase($this->mainImage_id, 300) . '';
             }
         }
         $html .= '</div>';
