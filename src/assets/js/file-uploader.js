@@ -237,7 +237,11 @@ function uploadImage($form, $formName, $service, $formId = '', $attribute = '') 
             if (response.uploaded == 1) {
                 $("#" + main).html("<img  style=\'" + $ImageSize + "\'  src=\'" + response.url + "\' >");
                 containerContent = $("#" + main).html();
-                $("#" + $form + "-image_id").val(response.id);
+                if ($attribute != '') {
+                    $("#" + $form + "-" + $attribute).val(response.id);
+                } else {
+                    $("#" + $form + "-image_id").val(response.id);
+                }
             } else {
                 alert(response.error.message);
                 $("#" + main).html(containerContent);
