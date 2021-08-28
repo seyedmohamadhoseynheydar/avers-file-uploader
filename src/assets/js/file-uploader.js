@@ -191,16 +191,22 @@ function uploadFileForItems($p, $i, $pd, $form, $formName, $formId = '') {
 }
 
 
-function openUploadFile(form) {
-    $("#" + form + "-mainimage").trigger('click');
+function openUploadFile(form, attribute_mainimage) {
+    $("#" + form + "-" + attribute_mainimage ).trigger('click');
 
 }
 
-function uploadImage($form, $formName, $service, $formId = '') {
-    var url = $("#data-url-img-avers").attr("url");
+function uploadImage($form, $formName, $service, $formId = '', $attribute = '') {
     var webDir = $("#web-directory-avers").val();
+    var main = '';
+    if ($attribute != '') {
+        main = 'main-image-' + $attribute;
+    } else {
+        main = 'main-image';
+    }
 
-    $main = 'main-image';
+    var url = $("#" + main).parent().find("#data-url-img-avers").attr("url");
+
     if ($formId != '') {
         var formData = new FormData(document.getElementById($formId));
     } else {
@@ -215,7 +221,7 @@ function uploadImage($form, $formName, $service, $formId = '') {
     else {
         $ImageSize = 'margin-top:10px';
     }
-    var containerContent = $("#" + $main).html();
+    var containerContent = $("#" + main).html();
 
     $.ajax({
         url: url + "&formName=" + $formName,  //Server script to process data
@@ -223,18 +229,18 @@ function uploadImage($form, $formName, $service, $formId = '') {
         data: formData,
 
         beforeSend: function (e) {
-            $('#' + $main).html('<img src="' + webDir + 'images/loading.svg" >');
+            $('#' + main).html('<img src="' + webDir + 'images/loading.svg" >');
         },
 
         success: function (response) {
 
             if (response.uploaded == 1) {
-                $("#" + $main).html("<img  style=\'" + $ImageSize + "\'  src=\'" + response.url + "\' >");
-                containerContent = $("#" + $main).html();
+                $("#" + main).html("<img  style=\'" + $ImageSize + "\'  src=\'" + response.url + "\' >");
+                containerContent = $("#" + main).html();
                 $("#" + $form + "-image_id").val(response.id);
             } else {
                 alert(response.error.message);
-                $("#" + $main).html(containerContent);
+                $("#" + main).html(containerContent);
             }
 
 
