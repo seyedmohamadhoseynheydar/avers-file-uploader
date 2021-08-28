@@ -24,8 +24,9 @@ class ImageUploader extends Widget
     public $multiply_index;
     public $multiply_container;
     public $attribute;
-   
-    
+    public $mainimage_attribute;
+
+
 
 
 
@@ -33,9 +34,14 @@ class ImageUploader extends Widget
     {
         parent::init();
         Asset::register( $this->getView() );
+
         if (empty($this->attribute)) {
             $this->attribute = 'image_id';
+            $this->mainimage_attribute = 'mainimage';
+        } else {
+            $this->mainimage_attribute = 'mainimage_'.$this->attribute;
         }
+
         if (isset($this->model->{$this->attribute})) {
             $this->mainImage_id = $this->model->{$this->attribute};
         } else {
@@ -51,9 +57,9 @@ class ImageUploader extends Widget
 
         $html = '           
             <input type="hidden" id="data-url-img-avers"
-               url="'.\yii\helpers\Url::to(['file/ajax-upload', 'key' => 'mainimage', 'allowedType' => 'image']).'">
+               url="'.\yii\helpers\Url::to(['file/ajax-upload', 'key' => $this->mainimage_attribute, 'allowedType' => 'image']).'">
             <input type="hidden" id="ajax-upload-url-avers" url="'.\yii\helpers\Url::to(['file/ajax-upload']).'">
-            <input type="hidden" id="data-url-multi-img-avers" url="'.\yii\helpers\Url::to(['file/ajax-multi-upload', 'key' => 'mainimage', 'allowedType' => 'image']).'">
+            <input type="hidden" id="data-url-multi-img-avers" url="'.\yii\helpers\Url::to(['file/ajax-multi-upload', 'key' => $this->mainimage_attribute, 'allowedType' => 'image']).'">
             <input type="hidden" id="web-directory-avers" value="'.\yii\helpers\Url::to('@web/').'">
         ';
         $html .= '<label>';
@@ -64,7 +70,7 @@ class ImageUploader extends Widget
             $html .= '' . $this->form->field($this->model, $this->attribute.'[0][' . $this->multiply_index . ']', ['template' => '{input}'])->hiddenInput() . '';
             $html .= '</span>';
             $html .= '<span class="hidden">';
-            $html .= '' . $this->form->field($this->model, 'mainimage[0][' . $this->multiply_index . ']')->fileInput(['this-id' => $this->multiply_index, 'this-parent' => 0, 'onchange' => 'uploadMultiImage(0, ' . $this->multiply_index . ', "' . $this->multiply_container . '", "' . $this->form_name . '", "' . $this->form_name_capital . '")']) . '';
+            $html .= '' . $this->form->field($this->model, $this->mainimage_attribute.'[0][' . $this->multiply_index . ']')->fileInput(['this-id' => $this->multiply_index, 'this-parent' => 0, 'onchange' => 'uploadMultiImage(0, ' . $this->multiply_index . ', "' . $this->multiply_container . '", "' . $this->form_name . '", "' . $this->form_name_capital . '")']) . '';
             $html .= '</span>';
             $html .= '<button onclick=\'openUploadMultiFile(0, ' . $this->multiply_index . ', "' . $this->multiply_container . '", "' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px"
             this-id="' . $this->multiply_index . '" this-parent="0"
@@ -78,9 +84,9 @@ class ImageUploader extends Widget
             $html .= '' . $this->form->field($this->model, $this->attribute, ['template' => '{input}'])->hiddenInput() . '';
             $html .= '</span>';
             $html .= '<span class="hidden">';
-            $html .= '' . $this->form->field($this->model, 'mainimage')->fileInput(['onchange' =>  'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '","","' . $this->formId . '")']) . '';
+            $html .= '' . $this->form->field($this->model, $this->mainimage_attribute)->fileInput(['onchange' =>  'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '","","' . $this->formId . '", "'. $this->attribute .'")']) . '';
             $html .= '</span>';
-            $html .= '<button onclick=\'openUploadFile("' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
+            $html .= '<button onclick=\'openUploadFile("' . $this->form_name . '", "' . $this->mainimage_attribute . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
                   </button>';
         }
@@ -93,8 +99,11 @@ class ImageUploader extends Widget
                         <i class="fa fa-close"></i>
                   </button>';
         }
-
-        $html .= '<div id="main-image" style="margin-top: 10px">';
+        if (empty($this->attribute)) {
+            $html .= '<div id="main-image" style="margin-top: 10px">';
+        } else {
+            $html .= '<div id="main-image-'.$this->attribute.'" style="margin-top: 10px">';
+        }
         if ($this->mainImage_id) {
             if ($this->form_name == 'category') {
                 $html .= '' . $this->model->getImageTag(150) . '';
