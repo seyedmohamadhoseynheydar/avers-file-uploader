@@ -529,6 +529,9 @@ class FileController extends Controller
 
     public function actionVideo($id)
     {
+        if (!isset($id) || empty($id)){
+            return null;
+        }
         $file = File::find()->where(['uri' => $id])->select(['name', 'path'])->limit(1)->one();
         if ($file === null) {
             return null;
