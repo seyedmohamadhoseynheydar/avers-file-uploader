@@ -13,7 +13,6 @@ class ImageUploader extends Widget
 {
 
 
-
     public $form;
     public $form_name;
     public $form_name_capital;
@@ -27,22 +26,18 @@ class ImageUploader extends Widget
     public $mainimage_attribute;
 
 
-
-
-
     public function init()
     {
         parent::init();
-        Asset::register( $this->getView() );
-
+        Asset::register($this->getView());
+        $this->mainimage_attribute = 'mainimage';
         if (empty($this->attribute)) {
             $this->attribute = 'image_id';
-            $this->mainimage_attribute = 'mainimage';
-        } else {
-            $this->mainimage_attribute = 'mainimage_'.$this->attribute;
         }
-
         if (isset($this->model->{$this->attribute})) {
+            if (isset($this->model->mainimage_{$this->attribute})) {
+                $this->mainimage_attribute = $this->model->{$this->attribute};
+            }
             $this->mainImage_id = $this->model->{$this->attribute};
         } else {
             $this->mainImage_id = false;
@@ -57,20 +52,20 @@ class ImageUploader extends Widget
 
         $html = '           
             <input type="hidden" id="data-url-img-avers"
-               url="'.\yii\helpers\Url::to(['file/ajax-upload', 'key' => $this->mainimage_attribute, 'allowedType' => 'image']).'">
-            <input type="hidden" id="ajax-upload-url-avers" url="'.\yii\helpers\Url::to(['file/ajax-upload']).'">
-            <input type="hidden" id="data-url-multi-img-avers" url="'.\yii\helpers\Url::to(['file/ajax-multi-upload', 'key' => $this->mainimage_attribute, 'allowedType' => 'image']).'">
-            <input type="hidden" id="web-directory-avers" value="'.\yii\helpers\Url::to('@web/').'">
+               url="' . \yii\helpers\Url::to(['file/ajax-upload', 'key' => $this->mainimage_attribute, 'allowedType' => 'image']) . '">
+            <input type="hidden" id="ajax-upload-url-avers" url="' . \yii\helpers\Url::to(['file/ajax-upload']) . '">
+            <input type="hidden" id="data-url-multi-img-avers" url="' . \yii\helpers\Url::to(['file/ajax-multi-upload', 'key' => $this->mainimage_attribute, 'allowedType' => 'image']) . '">
+            <input type="hidden" id="web-directory-avers" value="' . \yii\helpers\Url::to('@web/') . '">
         ';
         $html .= '<label>';
         $html .= '' . Yii::t('app', 'upload main image') . '';
         $html .= '</label>';
         if (isset($this->multiply, $this->multiply_index) && $this->multiply && $this->multiply_index) {
             $html .= '<span class="hidden">';
-            $html .= '' . $this->form->field($this->model, $this->attribute.'[0][' . $this->multiply_index . ']', ['template' => '{input}'])->hiddenInput() . '';
+            $html .= '' . $this->form->field($this->model, $this->attribute . '[0][' . $this->multiply_index . ']', ['template' => '{input}'])->hiddenInput() . '';
             $html .= '</span>';
             $html .= '<span class="hidden">';
-            $html .= '' . $this->form->field($this->model, $this->mainimage_attribute.'[0][' . $this->multiply_index . ']')->fileInput(['this-id' => $this->multiply_index, 'this-parent' => 0, 'onchange' => 'uploadMultiImage(0, ' . $this->multiply_index . ', "' . $this->multiply_container . '", "' . $this->form_name . '", "' . $this->form_name_capital . '")']) . '';
+            $html .= '' . $this->form->field($this->model, $this->mainimage_attribute . '[0][' . $this->multiply_index . ']')->fileInput(['this-id' => $this->multiply_index, 'this-parent' => 0, 'onchange' => 'uploadMultiImage(0, ' . $this->multiply_index . ', "' . $this->multiply_container . '", "' . $this->form_name . '", "' . $this->form_name_capital . '")']) . '';
             $html .= '</span>';
             $html .= '<button onclick=\'openUploadMultiFile(0, ' . $this->multiply_index . ', "' . $this->multiply_container . '", "' . $this->form_name . '")\' type="button" class="btn btn-primary btn-sm ml-4px"
             this-id="' . $this->multiply_index . '" this-parent="0"
@@ -84,7 +79,7 @@ class ImageUploader extends Widget
             $html .= '' . $this->form->field($this->model, $this->attribute, ['template' => '{input}'])->hiddenInput() . '';
             $html .= '</span>';
             $html .= '<span class="hidden">';
-            $html .= '' . $this->form->field($this->model, $this->mainimage_attribute)->fileInput(['onchange' =>  'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '","","' . $this->formId . '", "'. $this->attribute .'")']) . '';
+            $html .= '' . $this->form->field($this->model, $this->mainimage_attribute)->fileInput(['onchange' => 'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '","","' . $this->formId . '")']) . '';
             $html .= '</span>';
             $html .= '<button onclick=\'openUploadFile("' . $this->form_name . '", "' . $this->mainimage_attribute . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
@@ -99,16 +94,13 @@ class ImageUploader extends Widget
                         <i class="fa fa-close"></i>
                   </button>';
         }
-        if (empty($this->attribute)) {
-            $html .= '<div id="main-image" style="margin-top: 10px">';
-        } else {
-            $html .= '<div id="main-image-'.$this->attribute.'" style="margin-top: 10px">';
-        }
+
+        $html .= '<div id="main-image" style="margin-top: 10px">';
         if ($this->mainImage_id) {
             if ($this->form_name == 'category') {
-                $html .= '' . $this->model->getImageTagBase($this->mainImage_id, 150) . '';
+                $html .= '' . $this->model->getImageTag(150) . '';
             } else {
-                $html .= '' . $this->model->getImageTagBase($this->mainImage_id, 300) . '';
+                $html .= '' . $this->model->getImageTag(700) . '';
             }
         }
         $html .= '</div>';
@@ -122,55 +114,57 @@ class ImageUploader extends Widget
             $html .= '(' . Yii::t("app", "Maximum 5 MB") . ')';
             $html .= '</p>';
         }
-        $html .= '<div class="modal fade" id="selectImageModal-one" tabindex="-1" role="dialog" aria-hidden="true">';
-        $html .= '<div class="modal-dialog modal-md">';
-        $html .= '<div class="modal-content">';
+        if (!isset($this->multiply) || empty($this->multiply) || !$this->multiply) {
+            $html .= '<div class="modal fade" id="selectImageModal-one" tabindex="-1" role="dialog" aria-hidden="true">';
+            $html .= '<div class="modal-dialog modal-md">';
+            $html .= '<div class="modal-content">';
 
-        $html .= '<div class="modal-header">';
-        $html .= '<button type="button" class="close close-modal-image-one">';
-        $html .= '<span aria-hidden="true">&times;</span>';
-        $html .= '</button>';
-        $html .= '<h4 class="modal-title">'.Yii::t('app', 'Add image from files').'</h4>';
-        $html .= '</div>';
+            $html .= '<div class="modal-header">';
+            $html .= '<button type="button" class="close close-modal-image-one">';
+            $html .= '<span aria-hidden="true">&times;</span>';
+            $html .= '</button>';
+            $html .= '<h4 class="modal-title">' . Yii::t('app', 'Add image from files') . '</h4>';
+            $html .= '</div>';
 
-        $html .= '<div class="modal-body" style="height: 300px;overflow-y: auto;">';
-        $html .= '<div class="row">';
-        $html .= '<div class="col-md-12">';
-        $html .= '<div style="margin-right: 15px">';
-        $files = File::find()
-            ->where(['type' => File::TYPE_IMAGE])
-            ->andWhere(['!=', 'id', 1])
-            ->orderBy('id desc')
-            ->limit(50)
-            ->all();
-        if ($files) {
-            foreach ($files as $file) {
-                $html .= '<div class="image-box" this-id="'.$file->id.'" this-src="'.$file->getImageUriById($file->id).'">';
-                $html .= '<img this-id="'.$file->id.'" this-src="'.$file->getImageUriById($file->id).'" src="'.$file->getImageUriById($file->id, 150).'">';
-                $html .= '<div class="overlay hidden">';
-                $html .= '<i class="fa fa-check"></i>';
-                $html .= '</div>';
-                $html .= '</div>';
+            $html .= '<div class="modal-body" style="height: 300px;overflow-y: auto;">';
+            $html .= '<div class="row">';
+            $html .= '<div class="col-md-12">';
+            $html .= '<div style="margin-right: 15px">';
+            $files = File::find()
+                ->where(['type' => File::TYPE_IMAGE])
+                ->andWhere(['!=', 'id', 1])
+                ->orderBy('id desc')
+                ->limit(50)
+                ->all();
+            if ($files) {
+                foreach ($files as $file) {
+                    $html .= '<div class="image-box" this-id="' . $file->id . '" this-src="' . $file->getImageUriById($file->id) . '">';
+                    $html .= '<img this-id="' . $file->id . '" this-src="' . $file->getImageUriById($file->id) . '" src="' . $file->getImageUriById($file->id, 150) . '">';
+                    $html .= '<div class="overlay hidden">';
+                    $html .= '<i class="fa fa-check"></i>';
+                    $html .= '</div>';
+                    $html .= '</div>';
+                }
             }
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+
+            $html .= '<div class="modal-footer">';
+            $html .= '<button type="button" class="btn btn-default close-modal-image-one">';
+            $html .= '' . Yii::t('app', 'Cancel') . '';
+            $html .= '</button>';
+            $html .= '<button id="btn-select-files-one" form-name="' . $this->form_name . '" type="button" class="btn btn-primary">';
+            $html .= '' . Yii::t('app', 'Submit') . '';
+            $html .= '</button>';
+            $html .= '</div>';
+
+
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
         }
-        $html .= '</div>';
-        $html .= '</div>';
-        $html .= '</div>';
-        $html .= '</div>';
-
-        $html .= '<div class="modal-footer">';
-        $html .= '<button type="button" class="btn btn-default close-modal-image-one">';
-        $html .= '' . Yii::t('app', 'Cancel') . '';
-        $html .= '</button>';
-        $html .= '<button id="btn-select-files-one" form-name="' . $this->form_name . '" type="button" class="btn btn-primary">';
-        $html .= '' . Yii::t('app', 'Submit') . '';
-        $html .= '</button>';
-        $html .= '</div>';
-
-
-        $html .= '</div>';
-        $html .= '</div>';
-        $html .= '</div>';
         return $html;
     }
 
