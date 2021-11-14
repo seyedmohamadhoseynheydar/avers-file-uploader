@@ -28,16 +28,15 @@ class ImageUploader extends Widget
 
     public function init()
     {
-        parent::init();
+       parent::init();
         Asset::register($this->getView());
         $this->mainimage_attribute = 'mainimage';
-        if (empty($this->attribute)) {
+        if (empty($this->attribute) || $this->attribute == 'image_id') {
             $this->attribute = 'image_id';
+        } else {
+            $this->mainimage_attribute = 'mainimage_'.$this->attribute;
         }
         if (isset($this->model->{$this->attribute})) {
-            if (isset($this->model->mainimage_{$this->attribute})) {
-                $this->mainimage_attribute = $this->model->{$this->attribute};
-            }
             $this->mainImage_id = $this->model->{$this->attribute};
         } else {
             $this->mainImage_id = false;
@@ -95,7 +94,11 @@ class ImageUploader extends Widget
                   </button>';
         }
 
-        $html .= '<div id="main-image" style="margin-top: 10px">';
+         if (empty($this->attribute) || $this->attribute == 'image_id') {
+            $html .= '<div id="main-image" style="margin-top: 10px">';
+        } else {
+            $html .= '<div id="main-image-'.$this->attribute.'" style="margin-top: 10px">';
+        }
         if ($this->mainImage_id) {
             if ($this->form_name == 'category') {
                 $html .= '' . $this->model->getImageTag(150) . '';
