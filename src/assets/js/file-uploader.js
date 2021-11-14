@@ -199,7 +199,7 @@ function openUploadFile(form, attribute_mainimage) {
 function uploadImage($form, $formName, $service, $formId = '', $attribute = '') {
     var webDir = $("#web-directory-avers").val();
     var main = '';
-    if ($attribute && $attribute 'image_id') {
+    if ($attribute && $attribute != 'image_id') {
         main = 'main-image-' + $attribute;
     } else {
         main = 'main-image';
