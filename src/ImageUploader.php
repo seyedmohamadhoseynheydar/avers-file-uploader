@@ -78,7 +78,7 @@ class ImageUploader extends Widget
             $html .= '' . $this->form->field($this->model, $this->attribute, ['template' => '{input}'])->hiddenInput() . '';
             $html .= '</span>';
             $html .= '<span class="hidden">';
-            $html .= '' . $this->form->field($this->model, $this->mainimage_attribute)->fileInput(['onchange' => 'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '","","' . $this->formId . '")']) . '';
+            $html .= '' . $this->form->field($this->model, $this->mainimage_attribute)->fileInput(['onchange' =>  'uploadImage("' . $this->form_name . '","' . $this->form_name_capital . '","","' . $this->formId . '", "'. $this->attribute .'")']) . '';
             $html .= '</span>';
             $html .= '<button onclick=\'openUploadFile("' . $this->form_name . '", "' . $this->mainimage_attribute . '")\' type="button" class="btn btn-primary btn-sm ml-4px">
                         <i class="fa fa-upload"></i>
